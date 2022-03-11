@@ -1,0 +1,34 @@
+.userMaintenanceCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.userMaintenanceCard1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.roleCard {
+  float: right;
+  padding: 20px;
+}
+
+.footer_btn_section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 50px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.right {
+  float: left !important;
+}

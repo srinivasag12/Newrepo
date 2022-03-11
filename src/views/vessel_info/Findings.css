@@ -1,0 +1,38 @@
+.cardfind{
+  /* background-color: lightblue; */
+  width: 100px;
+  margin-top: -15px;
+  margin-bottom: -20px;
+}
+.cardtext{
+  width: 100px;
+  margin-top: -15px;
+  margin-bottom: -35px;
+}
+.numberstyle{
+  font-weight: 600;
+  font-size: 24px;
+  text-align:center;
+}
+th{
+  font-size: 14px;
+  color: rgb(77, 124, 139);
+}
+td{
+  font-size: 12px;
+}
+/* .findingheader{
+  background-color: #51cbce;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: -12px;
+  border-radius: 6px;
+}
+.findingeWhite{
+  color: #f8f9fa;
+  font-weight: 700;
+  margin: 0;
+  font-Size: 20px;
+  margin-Top: 0;
+  margin-Bottom: 0;
+} */

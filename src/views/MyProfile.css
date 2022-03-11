@@ -1,0 +1,71 @@
+/* $theme--blue: #2470FF;
+$theme--orange: Tomato;
+$theme--purple: Purple;
+
+$color--primary: $theme--blue;
+$color--black: #222;
+$color--error: #F2180A;
+$color--success: #11AF41;
+$color--bg: radial-gradient(circle, $color--primary, darken($color--primary, 10%));
+
+$font-family: 'Muli', sans-serif;
+$font-size: 18px;
+
+$break--sm: 320px;
+$break--md: 641px;
+$break--lg: 769px;
+$break--xl: 1025px; */
+
+.input__label {
+  display: block;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 0.5em;
+  color: #222;
+}
+
+.input {
+  padding: 0.75em;
+  background-color: #f2f2f2;
+  color: #222;
+  box-sizing: border-box;
+  font-size: 18px;
+  border: 2px solid #f2f2f2;
+  margin-right: -3px;
+  width: 60%;
+  min-width: 325px;
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+
+  /* &: focus {
+      border-color: #2470FF;
+      background: rgba(#2470FF, 0.05);
+    } */
+}
+
+.input:focus {
+  border-color: #2470ff;
+  background: rgba(#2470ff, 0.05);
+}
+
+.numberstyle1 {
+  color: "#42a5f5" !important;
+  font-weight: "600";
+  font-size: "30px";
+}
+
+.circle:before {
+  content: "\25CF";
+  font-size: 20px;
+}
+
+.overviewValues {
+  font-weight: 500;
+}
+
+.titlesentencestyle {
+  font-weight: 600;
+  color: "#9A9A9A";
+  font-size: "large";
+}

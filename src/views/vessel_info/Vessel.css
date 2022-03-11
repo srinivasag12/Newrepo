@@ -1,0 +1,49 @@
+.card-list {
+  width: 79vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.head {
+  width: 79vw;
+  margin: 0 auto;
+}
+
+.cardBottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.cardBottomSection1 {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  font-weight: 500;
+}
+
+.vl {
+  border-left: 0.5px solid #d9d9d9;
+  height: 100%;
+  margin-left: 50%;
+}
+
+.cardBottomSection2 {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  font-weight: 500;
+}
+
+.circle:before {
+  content: "\25CF";
+  font-size: 20px;
+}
+
+*:focus {
+  outline: none !important;
+}

@@ -1,0 +1,69 @@
+.bookfind {
+  width: 120px;
+  margin-top: -15px;
+  margin-bottom: -35px;
+  text-transform: uppercase;
+  border-radius: 12px;
+}
+.booknamestyle {
+  font-weight: 900;
+  font-size: 22px;
+  text-align: center;
+  font-family: -webkit-pictograph;
+  margin-top: 12px;
+}
+.bookpage {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bookbtn {
+  margin-top: 15px;
+  margin-left: 30px;
+  width: 120px;
+  font-size: 15px;
+  border-radius: 12px;
+  outline: none;
+  background-color: white;
+}
+
+.bookanvessel {
+  margin-top: 15px;
+  color: #66615b;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 40px;
+}
+
+.bookanvesselable {
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: -13px;
+  margin-left: 40px;
+}
+
+.bookicon {
+  margin-bottom: -37px;
+  margin-top: 12px;
+  margin-left: 12px;
+  height: 15px;
+  width: 15px;
+  background-color: #51bcda;
+}
+
+.bookiconred {
+  margin-bottom: -37px;
+  margin-top: 12px;
+  margin-left: 12px;
+  height: 15px;
+  width: 15px;
+  background-color: #f98154;
+}
+
+.bookline {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  margin-top: -5px;
+}
