@@ -9,7 +9,7 @@ import {
 } from "react-table";
 import classnames from "classnames";
 // A great library for fuzzy filtering/sorting items
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 // react plugin used to create DropdownMenu for selecting items
 import Select from "react-select";
 

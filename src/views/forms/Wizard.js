@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -30,42 +30,40 @@ var steps = [
   {
     stepName: "About",
     stepIcon: "nc-icon nc-single-02",
-    component: Step1,
+    component: Step1
   },
   {
     stepName: "Account",
     stepIcon: "nc-icon nc-touch-id",
-    component: Step2,
+    component: Step2
   },
   {
     stepName: "Address",
     stepIcon: "nc-icon nc-pin-3",
-    component: Step3,
-  },
+    component: Step3
+  }
 ];
 
-class Wizard extends React.Component {
-  render() {
-    return (
-      <>
-        <div className="content">
-          <Col className="mr-auto ml-auto" md="10">
-            <ReactWizard
-              steps={steps}
-              navSteps
-              validate
-              title="Build Your Profile"
-              description="This information will let us know more about you."
-              headerTextCenter
-              finishButtonClasses="btn-wd"
-              nextButtonClasses="btn-wd"
-              previousButtonClasses="btn-wd"
-            />
-          </Col>
-        </div>
-      </>
-    );
-  }
+function Wizard() {
+  return (
+    <>
+      <div className="content">
+        <Col className="mr-auto ml-auto" md="10">
+          <ReactWizard
+            steps={steps}
+            navSteps
+            validate
+            title="Build Your Profile"
+            description="This information will let us know more about you."
+            headerTextCenter
+            finishButtonClasses="btn-wd"
+            nextButtonClasses="btn-wd"
+            previousButtonClasses="btn-wd"
+          />
+        </Col>
+      </div>
+    </>
+  );
 }
 
 export default Wizard;

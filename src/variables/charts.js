@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -14,50 +14,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-const Chart = require("chart.js");
-
-Chart.pluginService.register({
-  beforeDraw: function (chart) {
-    if (chart.config.options.elements.center) {
-      //Get ctx from string
-      var ctx = chart.chart.ctx;
-
-      //Get options from the center object in options
-      var centerConfig = chart.config.options.elements.center;
-      var fontStyle = centerConfig.fontStyle || "Arial";
-      var txt = centerConfig.text;
-      var color = centerConfig.color || "#000";
-      var sidePadding = centerConfig.sidePadding || 20;
-      var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2);
-      //Start with a base font of 30px
-      ctx.font = "30px " + fontStyle;
-
-      //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
-      var stringWidth = ctx.measureText(txt).width;
-      var elementWidth = chart.innerRadius * 2 - sidePaddingCalculated;
-
-      // Find out how much the font can grow in width.
-      var widthRatio = elementWidth / stringWidth;
-      var newFontSize = Math.floor(30 * widthRatio);
-      var elementHeight = chart.innerRadius * 2;
-
-      // Pick a new font size so it will not be larger than the height of label.
-      var fontSizeToUse = Math.min(newFontSize, elementHeight);
-
-      //Set font settings to draw it correctly.
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      var centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
-      var centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-      ctx.font = fontSizeToUse + "px " + fontStyle;
-      ctx.fillStyle = color;
-
-      //Draw text in center
-      ctx.fillText(txt, centerX, centerY);
-    }
-  },
-});
-
 // default color for the charts
 let chartColor = "#FFFFFF";
 // ##############################
@@ -94,7 +50,7 @@ const chartExample1 = {
       "Jul",
       "Aug",
       "Sep",
-      "Oct",
+      "Oct"
     ],
     datasets: [
       {
@@ -105,52 +61,47 @@ const chartExample1 = {
         fill: false,
         borderWidth: 3,
         barPercentage: 1.6,
-        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610],
-      },
-    ],
+        tension: 0.4,
+        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610]
+      }
+    ]
   },
   options: {
-    legend: {
-      display: false,
-    },
+    plugins: {
+      legend: {
+        display: false
+      },
 
-    tooltips: {
-      enabled: false,
+      tooltips: {
+        enabled: false
+      }
     },
 
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            beginAtZero: false,
-            maxTicksLimit: 5,
-            //padding: 20
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: false,
+          maxTicksLimit: 5
+          //padding: 20
         },
-      ],
-
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-            display: false,
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -179,49 +130,46 @@ const chartExample2 = {
           backgroundColor: gradientFill,
           borderWidth: 3,
           barPercentage: 1.6,
-          data: [40, 500, 650, 700, 1200, 1250, 1300, 1900],
-        },
-      ],
+          tension: 0.4,
+          data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+        }
+      ]
     };
   },
   options: {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        enabled: false
+      }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            beginAtZero: false,
-            maxTicksLimit: 5,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: false,
+          maxTicksLimit: 5
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-            display: false,
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -249,7 +197,7 @@ const chartExample3 = {
         "July",
         "August",
         "September",
-        "October",
+        "October"
       ],
       datasets: [
         {
@@ -261,49 +209,46 @@ const chartExample3 = {
           fill: false,
           borderWidth: 3,
           barPercentage: 1.6,
-          data: [80, 78, 86, 96, 83, 85, 76, 75, 88, 90],
-        },
-      ],
+          tension: 0.4,
+          data: [80, 78, 86, 96, 83, 85, 76, 75, 88, 90]
+        }
+      ]
     };
   },
   options: {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        enabled: false
+      }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            beginAtZero: false,
-            maxTicksLimit: 5,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: false,
+          maxTicksLimit: 5
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-            display: false,
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -312,27 +257,7 @@ const chartExample3 = {
 const chartExample4 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
     ],
     datasets: [
       {
@@ -344,27 +269,9 @@ const chartExample4 = {
         borderWidth: 8,
         barPercentage: 0.4,
         data: [
-          100,
-          120,
-          80,
-          100,
-          90,
-          130,
-          110,
-          100,
-          80,
-          110,
-          130,
-          140,
-          130,
-          120,
-          130,
-          80,
-          100,
-          90,
-          120,
-          130,
-        ],
+          100, 120, 80, 100, 90, 130, 110, 100, 80, 110, 130, 140, 130, 120,
+          130, 80, 100, 90, 120, 130
+        ]
       },
       {
         label: "Data",
@@ -375,87 +282,63 @@ const chartExample4 = {
         borderWidth: 8,
         barPercentage: 0.4,
         data: [
-          80,
-          140,
-          50,
-          120,
-          50,
-          150,
-          60,
-          130,
-          50,
-          130,
-          150,
-          100,
-          110,
-          80,
-          140,
-          50,
-          140,
-          50,
-          110,
-          150,
-        ],
-      },
-    ],
+          80, 140, 50, 120, 50, 150, 60, 130, 50, 130, 150, 100, 110, 80, 140,
+          50, 140, 50, 110, 150
+        ]
+      }
+    ]
   },
   options: {
-    tooltips: {
-      tooltipFillColor: "rgba(0,0,0,0.5)",
-      tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      tooltipFontSize: 14,
-      tooltipFontStyle: "normal",
-      tooltipFontColor: "#fff",
-      tooltipTitleFontFamily:
-        "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      tooltipTitleFontSize: 14,
-      tooltipTitleFontStyle: "bold",
-      tooltipTitleFontColor: "#fff",
-      tooltipYPadding: 6,
-      tooltipXPadding: 6,
-      tooltipCaretSize: 8,
-      tooltipCornerRadius: 6,
-      tooltipXOffset: 10,
-    },
-    legend: {
-      display: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 14,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10
+      }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            fontStyle: "bold",
-            beginAtZero: true,
-            maxTicksLimit: 5,
-            padding: 20,
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            display: true,
-            drawBorder: false,
-            color: "#9f9f9f",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          padding: 20
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            zeroLineColor: "white",
-            display: false,
-
-            drawBorder: false,
-            color: "transparent",
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-            fontStyle: "bold",
-          },
+        grid: {
+          zeroLineColor: "transparent",
+          display: true,
+          drawBorder: false,
+          color: "#9f9f9f"
+        }
+      },
+      x: {
+        grid: {
+          display: false,
+          drawBorder: false
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -472,53 +355,52 @@ const chartExample5 = {
         backgroundColor: ["#4acccd", "#f4f3ef"],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [60, 40],
-      },
-    ],
+        data: [60, 40]
+      }
+    ]
   },
   options: {
-    elements: {
-      center: {
-        text: "60%",
-        color: "#66615c", // Default is #000000
-        fontStyle: "Arial", // Default is Arial
-        sidePadding: 60, // Defualt is 20 (as a percentage)
+    plugins: {
+      legend: {
+        display: false
       },
+      tooltips: {
+        enabled: false
+      },
+      title: {
+        display: true,
+        text: "60%",
+        position: "bottom",
+        color: "#66615c",
+        font: {
+          weight: 400,
+          size: 30
+        }
+      }
     },
-    cutoutPercentage: 90,
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
+    maintainAspectRatio: false,
+    cutout: "90%",
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          display: false
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            display: false,
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -535,53 +417,52 @@ const chartExample6 = {
         backgroundColor: ["#fcc468", "#f4f3ef"],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [34, 66],
-      },
-    ],
+        data: [34, 66]
+      }
+    ]
   },
   options: {
-    elements: {
-      center: {
-        text: "34%",
-        color: "#66615c", // Default is #000000
-        fontStyle: "Arial", // Default is Arial
-        sidePadding: 60, // Defualt is 20 (as a percentage)
+    plugins: {
+      legend: {
+        display: false
       },
+      tooltips: {
+        enabled: false
+      },
+      title: {
+        display: true,
+        text: "34%",
+        position: "bottom",
+        color: "#66615c",
+        font: {
+          weight: 400,
+          size: 30
+        }
+      }
     },
-    cutoutPercentage: 90,
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
+    maintainAspectRatio: false,
+    cutout: "90%",
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          display: false
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            display: false,
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -598,53 +479,52 @@ const chartExample7 = {
         backgroundColor: ["#f17e5d", "#f4f3ef"],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [80, 20],
-      },
-    ],
+        data: [80, 20]
+      }
+    ]
   },
   options: {
-    elements: {
-      center: {
-        text: "80%",
-        color: "#66615c", // Default is #000000
-        fontStyle: "Arial", // Default is Arial
-        sidePadding: 60, // Defualt is 20 (as a percentage)
+    plugins: {
+      legend: {
+        display: false
       },
+      tooltips: {
+        enabled: false
+      },
+      title: {
+        display: true,
+        text: "80%",
+        position: "bottom",
+        color: "#66615c",
+        font: {
+          weight: 400,
+          size: 30
+        }
+      }
     },
-    cutoutPercentage: 90,
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
+    maintainAspectRatio: false,
+    cutout: "90%",
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          display: false
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            display: false,
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -661,53 +541,52 @@ const chartExample8 = {
         backgroundColor: ["#66615b", "#f4f3ef"],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [11, 89],
-      },
-    ],
+        data: [11, 89]
+      }
+    ]
   },
   options: {
-    elements: {
-      center: {
-        text: "11%",
-        color: "#66615c", // Default is #000000
-        fontStyle: "Arial", // Default is Arial
-        sidePadding: 60, // Defualt is 20 (as a percentage)
+    plugins: {
+      legend: {
+        display: false
       },
+      tooltips: {
+        enabled: false
+      },
+      title: {
+        display: true,
+        text: "11%",
+        position: "bottom",
+        color: "#66615c",
+        font: {
+          weight: 400,
+          size: 30
+        }
+      }
     },
-    cutoutPercentage: 90,
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
+    maintainAspectRatio: false,
+    cutout: "90%",
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          display: false
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            display: false,
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -728,49 +607,48 @@ const chartExample9 = {
         fill: false,
         borderWidth: 3,
         barPercentage: 1.6,
-        data: [200, 250, 300, 350, 280, 330, 400],
-      },
-    ],
+        data: [200, 250, 300, 350, 280, 330, 400]
+      }
+    ]
   },
   options: {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        enabled: false
+      }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            beginAtZero: false,
-            maxTicksLimit: 5,
-          },
-          gridLines: {
-            drawBorder: false,
-            borderDash: [8, 5],
-            zeroLineColor: "transparent",
-            color: "#9f9f9f",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: false,
+          maxTicksLimit: 5
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            borderDash: [8, 5],
-            color: "#9f9f9f",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-          },
+        grid: {
+          drawBorder: false,
+          borderDash: [8, 5],
+          zeroLineColor: "transparent",
+          color: "#9f9f9f"
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          borderDash: [8, 5],
+          color: "#9f9f9f",
+          zeroLineColor: "transparent"
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -780,27 +658,7 @@ const chartExample9 = {
 const chartExample10 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
     ],
     datasets: [
       {
@@ -812,86 +670,67 @@ const chartExample10 = {
         borderWidth: 5,
         barPercentage: 0.4,
         data: [
-          100,
-          120,
-          80,
-          100,
-          90,
-          130,
-          110,
-          100,
-          80,
-          110,
-          130,
-          140,
-          130,
-          120,
-          130,
-          80,
-          100,
-          90,
-          120,
-          130,
-        ],
-      },
-    ],
+          100, 120, 80, 100, 90, 130, 110, 100, 80, 110, 130, 140, 130, 120,
+          130, 80, 100, 90, 120, 130
+        ]
+      }
+    ]
   },
   options: {
-    tooltips: {
-      tooltipFillColor: "rgba(0,0,0,0.5)",
-      tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      tooltipFontSize: 14,
-      tooltipFontStyle: "normal",
-      tooltipFontColor: "#fff",
-      tooltipTitleFontFamily:
-        "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      tooltipTitleFontSize: 14,
-      tooltipTitleFontStyle: "bold",
-      tooltipTitleFontColor: "#fff",
-      tooltipYPadding: 6,
-      tooltipXPadding: 6,
-      tooltipCaretSize: 8,
-      tooltipCornerRadius: 6,
-      tooltipXOffset: 10,
-    },
-    legend: {
-      display: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 14,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10
+      }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            fontStyle: "bold",
-            beginAtZero: true,
-            maxTicksLimit: 5,
-            padding: 20,
-          },
-          gridLines: {
-            zeroLineColor: "transparent",
-            display: true,
-            drawBorder: false,
-            color: "#9f9f9f",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          fontStyle: "bold",
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          padding: 20
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            zeroLineColor: "white",
-            display: false,
-            drawBorder: false,
-            color: "transparent",
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-            fontStyle: "bold",
-          },
+        grid: {
+          zeroLineColor: "transparent",
+          display: true,
+          drawBorder: false,
+          color: "#9f9f9f"
+        }
+      },
+      x: {
+        grid: {
+          zeroLineColor: "white",
+          display: false,
+          drawBorder: false,
+          color: "transparent"
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f",
+          fontStyle: "bold"
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -909,44 +748,44 @@ const chartExample11 = {
         backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468"],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [542, 480, 430],
-      },
-    ],
+        data: [542, 480, 430]
+      }
+    ]
   },
   options: {
-    legend: {
-      display: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        enabled: false
+      }
     },
-    tooltips: {
-      enabled: false,
-    },
+    maintainAspectRatio: false,
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          display: false
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-          },
-          ticks: {
-            display: false,
-          },
+        grid: {
+          drawBorder: false,
+          zeroLineColor: "transparent",
+          color: "rgba(255,255,255,0.05)"
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          color: "rgba(255,255,255,0.1)",
+          zeroLineColor: "transparent"
         },
-      ],
-    },
-  },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
 };
 
 // #########################################
@@ -954,87 +793,84 @@ const chartExample11 = {
 // #########################################
 
 const chartExample12 = {
-  data: {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-    ],
-    datasets: [
-      {
-        borderColor: "#6bd098",
-        backgroundColor: "#6bd098",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        borderWidth: 3,
-        barPercentage: 1.6,
-        data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
-      },
-      {
-        borderColor: "#f17e5d",
-        backgroundColor: "#f17e5d",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        borderWidth: 3,
-        barPercentage: 1.6,
-        data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420],
-      },
-      {
-        borderColor: "#fcc468",
-        backgroundColor: "#fcc468",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        borderWidth: 3,
-        barPercentage: 1.6,
-        data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484],
-      },
-    ],
+  data: (canvas) => {
+    return {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct"
+      ],
+      datasets: [
+        {
+          borderColor: "#6bd098",
+          backgroundColor: "#6bd098",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354]
+        },
+        {
+          borderColor: "#f17e5d",
+          backgroundColor: "#f17e5d",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420]
+        },
+        {
+          borderColor: "#fcc468",
+          backgroundColor: "#fcc468",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
+        }
+      ]
+    };
   },
   options: {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: false }
     },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: "#9f9f9f",
-            beginAtZero: false,
-            maxTicksLimit: 5,
-          },
-          gridLines: {
-            drawBorder: false,
-            zeroLineColor: "transparent",
-            color: "rgba(255,255,255,0.05)",
-          },
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          beginAtZero: false,
+          maxTicksLimit: 5
         },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
-            zeroLineColor: "transparent",
-            display: false,
-          },
-          ticks: {
-            padding: 20,
-            fontColor: "#9f9f9f",
-          },
+        grid: {
+          drawBorder: false,
+          display: false
+        }
+      },
+      x: {
+        barPercentage: 1.6,
+        grid: {
+          drawBorder: false,
+          display: false
         },
-      ],
-    },
-  },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f"
+        }
+      }
+    }
+  }
 };
 
 module.exports = {
@@ -1061,5 +897,5 @@ module.exports = {
   // used for Charts view
   chartExample11,
   // used for Charts view
-  chartExample12,
+  chartExample12
 };

@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -26,21 +26,22 @@ import routes from "routes.js";
 
 var ps;
 
-class Pages extends React.Component {
-  componentDidMount() {
+function Pages() {
+  const fullPages = React.useRef();
+  React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(this.refs.fullPages);
+      ps = new PerfectScrollbar(fullPages.current);
     }
-  }
-  componentWillUnmount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps.destroy();
-    }
-  }
-  getRoutes = (routes) => {
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+      }
+    };
+  });
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
-        return this.getRoutes(prop.views);
+        return getRoutes(prop.views);
       }
       if (prop.layout === "/auth") {
         return (
@@ -55,19 +56,17 @@ class Pages extends React.Component {
       }
     });
   };
-  render() {
-    return (
-      <>
-        <AuthNavbar />
-        <div className="wrapper wrapper-full-page" ref="fullPages">
-          <div className="full-page section-image">
-            <Switch>{this.getRoutes(routes)}</Switch>
-            <Footer fluid />
-          </div>
+  return (
+    <>
+      <AuthNavbar />
+      <div className="wrapper wrapper-full-page" ref={fullPages}>
+        <div className="full-page section-image">
+          <Switch>{getRoutes(routes)}</Switch>
+          <Footer fluid />
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default Pages;

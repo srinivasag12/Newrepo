@@ -7,6 +7,9 @@
     &.wrapper-full-page{
         min-height: 100vh;
         height: auto;
+        .full-page{
+          display: flex;
+        }
     }
 }
 

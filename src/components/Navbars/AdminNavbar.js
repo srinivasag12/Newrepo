@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -16,7 +16,7 @@
 */
 import React from "react";
 import classnames from "classnames";
-import { useRouteName } from "hooks";
+import { useLocation } from "react-router-dom";
 import {
   Button,
   Collapse,
@@ -34,244 +34,189 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container,
+  Container
 } from "reactstrap";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
 
-class AdminNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapseOpen: false,
-      color: "navbar-transparent",
-    };
-  }
-  componentDidMount() {
-    window.addEventListener("resize", this.updateColor);
-  }
-  componentDidUpdate(e) {
-    console.log("componentDidUpdate >>>", e);
+function AdminNavbar(props) {
+  const [collapseOpen, setCollapseOpen] = React.useState(false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [color, setColor] = React.useState("navbar-transparent");
+  const location = useLocation();
+  React.useEffect(() => {
+    window.addEventListener("resize", updateColor);
+  });
+  React.useEffect(() => {
     if (
       window.outerWidth < 993 &&
-      e.history.location.pathname !== e.location.pathname &&
       document.documentElement.className.indexOf("nav-open") !== -1
     ) {
       document.documentElement.classList.toggle("nav-open");
     }
-  }
+  }, [location]);
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
-  updateColor = () => {
-    if (window.innerWidth < 993 && this.state.collapseOpen) {
-      this.setState({
-        color: "bg-white",
-      });
+  const updateColor = () => {
+    if (window.innerWidth < 993 && collapseOpen) {
+      setColor("bg-white");
     } else {
-      this.setState({
-        color: "navbar-transparent",
-      });
+      setColor("navbar-transparent");
     }
   };
   // this function opens and closes the sidebar on small devices
-  toggleSidebar = () => {
+  const toggleSidebar = () => {
     document.documentElement.classList.toggle("nav-open");
+    setSidebarOpen(!sidebarOpen);
   };
   // this function opens and closes the collapse on small devices
   // it also adds navbar-transparent class to the navbar when closed
   // ad bg-white when opened
-  toggleCollapse = () => {
-    let newState = {
-      collapseOpen: !this.state.collapseOpen,
-    };
-    if (!this.state.collapseOpen) {
-      newState["color"] = "bg-white";
+  const toggleCollapse = () => {
+    if (!collapseOpen) {
+      setColor("bg-white");
     } else {
-      newState["color"] = "navbar-transparent";
+      setColor("navbar-transparent");
     }
-    this.setState(newState);
+    setCollapseOpen(!collapseOpen);
   };
-
-  logOut = () => {
-    localStorage.removeItem("role");
-    this.props.history.push("/login");
-  };
-
-  render() {
-    const routeName = useRouteName();
-    //const history = useHistory();
-
-    return (
-      <>
-        <Navbar
-          className={classnames("navbar-absolute fixed-top", this.state.color)}
-          expand="lg"
-        >
-          <Container fluid>
-            <div className="navbar-wrapper">
-              <div className="navbar-minimize">
-                <Button
-                  className="btn-icon btn-round"
-                  color="default"
-                  id="minimizeSidebar"
-                  onClick={this.props.handleMiniClick}
-                >
-                  <i className="nc-icon nc-minimal-right text-center visible-on-sidebar-mini" />
-                  <i className="nc-icon nc-minimal-left text-center visible-on-sidebar-regular" />
-                </Button>
-              </div>
-              <div
-                className={classnames("navbar-toggle", {
-                  toggled: this.state.sidebarOpen,
-                })}
+  return (
+    <>
+      <Navbar
+        className={classnames("navbar-absolute fixed-top", color)}
+        expand="lg"
+      >
+        <Container fluid>
+          <div className="navbar-wrapper">
+            <div className="navbar-minimize">
+              <Button
+                className="btn-icon btn-round"
+                color="default"
+                id="minimizeSidebar"
+                onClick={props.handleMiniClick}
               >
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  onClick={this.toggleSidebar}
-                >
-                  <span className="navbar-toggler-bar bar1" />
-                  <span className="navbar-toggler-bar bar2" />
-                  <span className="navbar-toggler-bar bar3" />
-                </button>
-              </div>
-              <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
-                <span className="d-none d-md-block">{routeName}</span>
-                <span className="d-block d-md-none">PD PRO React</span>
-              </NavbarBrand>
+                <i className="nc-icon nc-minimal-right text-center visible-on-sidebar-mini" />
+                <i className="nc-icon nc-minimal-left text-center visible-on-sidebar-regular" />
+              </Button>
             </div>
-            <button
-              aria-controls="navigation-index"
-              aria-expanded={this.state.collapseOpen}
-              aria-label="Toggle navigation"
-              className="navbar-toggler"
-              // data-target="#navigation"
-              data-toggle="collapse"
-              type="button"
-              onClick={this.toggleCollapse}
+            <div
+              className={classnames("navbar-toggle", {
+                toggled: sidebarOpen
+              })}
             >
-              <span className="navbar-toggler-bar navbar-kebab" />
-              <span className="navbar-toggler-bar navbar-kebab" />
-              <span className="navbar-toggler-bar navbar-kebab" />
-            </button>
-            <Collapse
-              className="justify-content-end"
-              navbar
-              isOpen={this.state.collapseOpen}
-            >
-              {/* <Form>
-                <InputGroup className="no-border">
-                  <Input defaultValue="" placeholder="Search..." type="text" />
-                  <InputGroupAddon addonType="append">
-                    <InputGroupText>
-                      <i className="nc-icon nc-zoom-split" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                </InputGroup>
-              </Form> */}
-              <Nav navbar>
-                <NavItem></NavItem>
-                <UncontrolledDropdown className="btn-rotate" nav>
-                  <DropdownToggle
-                    aria-haspopup={true}
-                    caret
-                    color="default"
-                    data-toggle="dropdown"
-                    id="navbarDropdownMenuLink"
-                    nav
-                  >
-                    <i className="nc-icon nc-bell-55" />
-                    <p>
-                      <span className="d-lg-none d-md-block">Some Actions</span>
-                    </p>
-                  </DropdownToggle>
-                  <DropdownMenu
-                    persist
-                    aria-labelledby="navbarDropdownMenuLink"
-                    right
-                  >
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel AAMIRA Doc Expire due in next 30 days
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel ADVANTAGE SKY Review Completed
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel BLUE EVERTON ISM Initial certificate Expired
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-                <NavItem>
-                  <NavLink
-                    className="btn-rotate"
+              <button
+                className="navbar-toggler"
+                type="button"
+                onClick={toggleSidebar}
+              >
+                <span className="navbar-toggler-bar bar1" />
+                <span className="navbar-toggler-bar bar2" />
+                <span className="navbar-toggler-bar bar3" />
+              </button>
+            </div>
+            <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
+              <span className="d-none d-md-block">
+                Paper Dashboard PRO React
+              </span>
+              <span className="d-block d-md-none">PD PRO React</span>
+            </NavbarBrand>
+          </div>
+          <button
+            aria-controls="navigation-index"
+            aria-expanded={collapseOpen}
+            aria-label="Toggle navigation"
+            className="navbar-toggler"
+            // data-target="#navigation"
+            data-toggle="collapse"
+            type="button"
+            onClick={toggleCollapse}
+          >
+            <span className="navbar-toggler-bar navbar-kebab" />
+            <span className="navbar-toggler-bar navbar-kebab" />
+            <span className="navbar-toggler-bar navbar-kebab" />
+          </button>
+          <Collapse
+            className="justify-content-end"
+            navbar
+            isOpen={collapseOpen}
+          >
+            <Form>
+              <InputGroup className="no-border">
+                <Input defaultValue="" placeholder="Search..." type="text" />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <i className="nc-icon nc-zoom-split" />
+                  </InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            </Form>
+            <Nav navbar>
+              <NavItem>
+                <NavLink
+                  className="btn-magnify"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <i className="nc-icon nc-layout-11" />
+                  <p>
+                    <span className="d-lg-none d-md-block">Stats</span>
+                  </p>
+                </NavLink>
+              </NavItem>
+              <UncontrolledDropdown className="btn-rotate" nav>
+                <DropdownToggle
+                  aria-haspopup={true}
+                  caret
+                  color="default"
+                  data-toggle="dropdown"
+                  id="navbarDropdownMenuLink"
+                  nav
+                >
+                  <i className="nc-icon nc-bell-55" />
+                  <p>
+                    <span className="d-lg-none d-md-block">Some Actions</span>
+                  </p>
+                </DropdownToggle>
+                <DropdownMenu
+                  persist
+                  aria-labelledby="navbarDropdownMenuLink"
+                  right
+                >
+                  <DropdownItem
                     href="#pablo"
-                    onClick={(e) =>
-                      this.props.history.push("/admin/notification")
-                    }
+                    onClick={(e) => e.preventDefault()}
                   >
-                    <i className="nc-icon nc-settings-gear-65" />
-
-                    <p>
-                      <span className="d-lg-none d-md-block">Account</span>
-                    </p>
-                  </NavLink>
-                </NavItem>
-
-                <UncontrolledDropdown className="btn-magnify" nav>
-                  <DropdownToggle
-                    aria-haspopup={true}
-                    caret
-                    color="default"
-                    data-toggle="dropdown"
-                    id="navbarDropdownMenuLink"
-                    nav
+                    Action
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
                   >
-                    {/* <i className="nc-icon nc-circle-10" /> */}
-                    <img
-                      alt="..."
-                      className="avatar border-gray"
-                      src={require("assets/img/default-avatar.png")}
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <p>
-                      <span className="d-lg-none d-md-block">Some Actions</span>
-                    </p>
-                  </DropdownToggle>
-                  <DropdownMenu
-                    persist
-                    aria-labelledby="navbarDropdownMenuLink"
-                    right
+                    Another action
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
                   >
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => this.props.history.push("/admin/profile")}
-                    >
-                      <span>My Profile </span>
-                    </DropdownItem>
-                    <DropdownItem href="#pablo" onClick={this.logOut}>
-                      Log Out
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Nav>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </>
-    );
-  }
+                    Something else here
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <NavItem>
+                <NavLink
+                  className="btn-rotate"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <i className="nc-icon nc-settings-gear-65" />
+                  <p>
+                    <span className="d-lg-none d-md-block">Account</span>
+                  </p>
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
 }
 
 export default AdminNavbar;

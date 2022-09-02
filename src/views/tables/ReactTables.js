@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -24,7 +24,7 @@ import {
   CardBody,
   CardTitle,
   Row,
-  Col,
+  Col
 } from "reactstrap";
 
 // core components
@@ -72,145 +72,140 @@ const dataTable = [
   ["Vivian Harrell", "Financial Controller", "San Francisco", "62"],
   ["Timothy Mooney", "Office Manager", "London", "37"],
   ["Jackson Bradshaw", "Director", "New York", "65"],
-  ["Olivia Liang", "Support Engineer", "Singapore", "64"],
+  ["Olivia Liang", "Support Engineer", "Singapore", "64"]
 ];
 
-class ReactTables extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: dataTable.map((prop, key) => {
-        return {
-          id: key,
-          name: prop[0],
-          position: prop[1],
-          office: prop[2],
-          age: prop[3],
-          actions: (
-            // we've added some custom button actions
-            <div className="actions-right">
-              {/* use this button to add a like kind of action */}
-              <Button
-                onClick={() => {
-                  let obj = this.state.data.find((o) => o.id === key);
-                  alert(
-                    "You've clicked LIKE button on \n{ \nName: " +
-                      obj.name +
-                      ", \nposition: " +
-                      obj.position +
-                      ", \noffice: " +
-                      obj.office +
-                      ", \nage: " +
-                      obj.age +
-                      "\n}."
-                  );
-                }}
-                color="info"
-                size="sm"
-                className="btn-icon btn-link like"
-              >
-                <i className="fa fa-heart" />
-              </Button>{" "}
-              {/* use this button to add a edit kind of action */}
-              <Button
-                onClick={() => {
-                  let obj = this.state.data.find((o) => o.id === key);
-                  alert(
-                    "You've clicked EDIT button on \n{ \nName: " +
-                      obj.name +
-                      ", \nposition: " +
-                      obj.position +
-                      ", \noffice: " +
-                      obj.office +
-                      ", \nage: " +
-                      obj.age +
-                      "\n}."
-                  );
-                }}
-                color="warning"
-                size="sm"
-                className="btn-icon btn-link edit"
-              >
-                <i className="fa fa-edit" />
-              </Button>{" "}
-              {/* use this button to remove the data row */}
-              <Button
-                onClick={() => {
-                  var data = this.state.data;
-                  data.find((o, i) => {
-                    if (o.id === key) {
-                      // here you should add some custom code so you can delete the data
-                      // from this component and from your server as well
-                      data.splice(i, 1);
-                      console.log(data);
-                      return true;
+function ReactTables() {
+  const [dataState, setDataState] = React.useState(
+    dataTable.map((prop, key) => {
+      return {
+        id: key,
+        name: prop[0],
+        position: prop[1],
+        office: prop[2],
+        age: prop[3],
+        actions: (
+          // we've added some custom button actions
+          <div className="actions-right">
+            {/* use this button to add a like kind of action */}
+            <Button
+              onClick={() => {
+                let obj = dataState.find((o) => o.id === key);
+                alert(
+                  "You've clicked LIKE button on \n{ \nName: " +
+                    obj.name +
+                    ", \nposition: " +
+                    obj.position +
+                    ", \noffice: " +
+                    obj.office +
+                    ", \nage: " +
+                    obj.age +
+                    "\n}."
+                );
+              }}
+              color="info"
+              size="sm"
+              className="btn-icon btn-link like"
+            >
+              <i className="fa fa-heart" />
+            </Button>{" "}
+            {/* use this button to add a edit kind of action */}
+            <Button
+              onClick={() => {
+                let obj = dataState.find((o) => o.id === key);
+                alert(
+                  "You've clicked EDIT button on \n{ \nName: " +
+                    obj.name +
+                    ", \nposition: " +
+                    obj.position +
+                    ", \noffice: " +
+                    obj.office +
+                    ", \nage: " +
+                    obj.age +
+                    "\n}."
+                );
+              }}
+              color="warning"
+              size="sm"
+              className="btn-icon btn-link edit"
+            >
+              <i className="fa fa-edit" />
+            </Button>{" "}
+            {/* use this button to remove the data row */}
+            <Button
+              onClick={() => {
+                var data = dataState;
+                data.find((o, i) => {
+                  if (o.id === key) {
+                    // here you should add some custom code so you can delete the data
+                    // from this component and from your server as well
+                    data.splice(i, 1);
+                    console.log(data);
+                    return true;
+                  }
+                  return false;
+                });
+                setDataState(data);
+              }}
+              color="danger"
+              size="sm"
+              className="btn-icon btn-link remove"
+            >
+              <i className="fa fa-times" />
+            </Button>{" "}
+          </div>
+        )
+      };
+    })
+  );
+  return (
+    <>
+      <div className="content">
+        <Row>
+          <Col md="12">
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">React-Tables</CardTitle>
+              </CardHeader>
+              <CardBody>
+                <ReactTable
+                  data={dataState}
+                  columns={[
+                    {
+                      Header: "Name",
+                      accessor: "name"
+                    },
+                    {
+                      Header: "Position",
+                      accessor: "position"
+                    },
+                    {
+                      Header: "Office",
+                      accessor: "office"
+                    },
+                    {
+                      Header: "Age",
+                      accessor: "age"
+                    },
+                    {
+                      Header: "Actions",
+                      accessor: "actions",
+                      sortable: false,
+                      filterable: false
                     }
-                    return false;
-                  });
-                  this.setState({ data: data });
-                }}
-                color="danger"
-                size="sm"
-                className="btn-icon btn-link remove"
-              >
-                <i className="fa fa-times" />
-              </Button>{" "}
-            </div>
-          ),
-        };
-      }),
-    };
-  }
-  render() {
-    return (
-      <>
-        <div className="content">
-          <Row>
-            <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">React-Tables</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <ReactTable
-                    data={this.state.data}
-                    columns={[
-                      {
-                        Header: "Name",
-                        accessor: "name",
-                      },
-                      {
-                        Header: "Position",
-                        accessor: "position",
-                      },
-                      {
-                        Header: "Office",
-                        accessor: "office",
-                      },
-                      {
-                        Header: "Age",
-                        accessor: "age",
-                      },
-                      {
-                        Header: "Actions",
-                        accessor: "actions",
-                        sortable: false,
-                        filterable: false,
-                      },
-                    ]}
-                    /*
+                  ]}
+                  /*
                       You can choose between primary-pagination, info-pagination, success-pagination, warning-pagination, danger-pagination or none - which will make the pagination buttons gray
                     */
-                    className="-striped -highlight primary-pagination"
-                  />
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
-  }
+                  className="-striped -highlight primary-pagination"
+                />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    </>
+  );
 }
 
 export default ReactTables;

@@ -4,7 +4,7 @@
     margin-right: 3px;
   }
 }
-.table not(.btn-group) .btn + .btn,
+.table :not(.btn-group) .btn + .btn,
 .table .btn-group + .btn-group{
   margin-left: 4px;
 }

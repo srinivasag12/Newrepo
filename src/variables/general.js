@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -63,8 +63,8 @@ const dataForReactTable = {
     ["Vivian Harrell", "Financial Controller", "San Francisco", "62"],
     ["Timothy Mooney", "Office Manager", "London", "37"],
     ["Jackson Bradshaw", "Director", "New York", "65"],
-    ["Olivia Liang", "Support Engineer", "Singapore", "64"],
-  ],
+    ["Olivia Liang", "Support Engineer", "Singapore", "64"]
+  ]
 };
 
 // ##############################
@@ -81,48 +81,48 @@ const events = [
     title: "All Day Event",
     allDay: true,
     start: new Date(y, m, 1),
-    end: new Date(y, m, 1),
+    end: new Date(y, m, 1)
   },
   {
     title: "Meeting",
     start: new Date(y, m, d - 1, 10, 30),
     end: new Date(y, m, d - 1, 11, 30),
     allDay: false,
-    color: "green",
+    color: "green"
   },
   {
     title: "Lunch",
     start: new Date(y, m, d + 7, 12, 0),
     end: new Date(y, m, d + 7, 14, 0),
     allDay: false,
-    color: "red",
+    color: "red"
   },
   {
     title: "PD-PRO-REACT Launch",
     start: new Date(y, m, d - 2),
     end: new Date(y, m, d - 2),
     allDay: true,
-    color: "azure",
+    color: "azure"
   },
   {
     title: "Birthday Party",
     start: new Date(y, m, d + 1, 19, 0),
     end: new Date(y, m, d + 1, 22, 30),
     allDay: false,
-    color: "azure",
+    color: "azure"
   },
   {
     title: "Click for Creative Tim",
     start: new Date(y, m, 21),
     end: new Date(y, m, 22),
-    color: "orange",
+    color: "orange"
   },
   {
     title: "Click for Google",
     start: new Date(y, m, 21),
     end: new Date(y, m, 22),
-    color: "orange",
-  },
+    color: "orange"
+  }
 ];
 
 // ##############################
@@ -144,10 +144,10 @@ const table_data = [
     flag: gb_flag,
     country: "United Kingdom",
     count: "690",
-    percentage: "7.87%",
+    percentage: "7.87%"
   },
   { flag: ro_flag, country: "Romania", count: "600", percentage: "5.94%" },
-  { flag: br_flag, country: "Brasil", count: "550", percentage: "4.34%" },
+  { flag: br_flag, country: "Brasil", count: "550", percentage: "4.34%" }
 ];
 
 export { dataForReactTable, events, table_data };

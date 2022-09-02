@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React from "react";
 
 // reactstrap components
 import {
@@ -31,157 +31,83 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  NavLink,
   Col,
-  Row,
+  Row
 } from "reactstrap";
 
-import { useHistory } from "react-router-dom";
-
-function Login(props) {
-  const history = useHistory();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleUsernameChange(event) {
-    console.log("user", event);
-    setUsername(event.target.value);
-  }
-
-  function handlePasswordChange(event) {
-    console.log("pass", event);
-    setPassword(event.target.value);
-  }
-
-  function handleSubmit() {
-    console.log("username", username);
-    console.log("password", password);
-
-    {
-      (username == "admin") & (password == "admin") ? admin() : company();
-    }
-  }
-
-  function admin() {
-    localStorage.setItem("role", "admin");
-    history.push("/admin/dashboard");
-  }
-
-  function company() {
-    localStorage.setItem("role", "company");
-    history.push("/admin/dashboard");
-  }
-
-  // class Login extends React.Component {
-  //   componentDidMount() {
-  //     document.body.classList.toggle("login-page");
-  //   }
-  //   componentWillUnmount() {
-  //     document.body.classList.toggle("login-page");
-  //   }
-
+function Login() {
+  React.useEffect(() => {
+    document.body.classList.toggle("login-page");
+    return function cleanup() {
+      document.body.classList.toggle("login-page");
+    };
+  });
   return (
-    <div
-      className="full-page-background"
-      style={{
-        backgroundImage: `url(${require("assets/img/IRI_Login.jpg")})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        position: "absolute",
-        width: "100vw",
-        height: "100vh",
-      }}
-    >
-      <div
-        style={{
-          fontSize: "xx-large",
-          marginTop: " 20px",
-          marginLeft: "100px",
-          color: "#fafafa",
-        }}
-      >
-        OWNER PORTAL
-      </div>
-      <div className="content" style={{ marginTop: "150px" }}>
-        <Container>
-          <Row>
-            <Col className="ml-auto mr-auto" lg="4" md="6">
-              <Form
-                action=""
-                className="form"
-                method=""
-                onSubmit={handleSubmit}
-              >
-                <Card className="card-login">
+    <div className="login-page">
+      <Container>
+        <Row>
+          <Col className="ml-auto mr-auto" lg="4" md="6">
+            <Form action="" className="form" method="">
+              <Card className="card-login">
+                <CardHeader>
                   <CardHeader>
-                    <CardHeader>
-                      <h3 className="header text-center">Login</h3>
-                    </CardHeader>
+                    <h3 className="header text-center">Login</h3>
                   </CardHeader>
-                  <CardBody>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-single-02" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        placeholder="User Name ..."
-                        type="text"
-                        value={username}
-                        onChange={handleUsernameChange}
-                      />
-                    </InputGroup>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-key-25" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        placeholder="Password"
-                        type="password"
-                        autoComplete="off"
-                        value={password}
-                        onChange={handlePasswordChange}
-                      />
-                    </InputGroup>
-                    <br />
-                    <FormGroup>
-                      <FormGroup check>
-                        <Label check>
-                          <Input
-                            defaultChecked
-                            defaultValue=""
-                            type="checkbox"
-                          />
-                          <span className="form-check-sign" />
-                          Remember Me
-                        </Label>
-                      </FormGroup>
+                </CardHeader>
+                <CardBody>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-single-02" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="First Name..." type="text" />
+                  </InputGroup>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-key-25" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Password"
+                      type="password"
+                      autoComplete="off"
+                    />
+                  </InputGroup>
+                  <br />
+                  <FormGroup>
+                    <FormGroup check>
+                      <Label check>
+                        <Input defaultChecked defaultValue="" type="checkbox" />
+                        <span className="form-check-sign" />
+                        Subscribe to newsletter
+                      </Label>
                     </FormGroup>
-                  </CardBody>
-                  <CardFooter>
-                    {/* <NavLink  href="/admin/dashboard" className="btn btn-primary">Sign up</NavLink > */}
-                    <Button
-                      block
-                      className="btn-round mb-3"
-                      color="success"
-                      href="#pablo"
-                      // onClick={() => history.push("/admin/dashboard")}
-                      onClick={() => handleSubmit()}
-                    >
-                      Login
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+                  </FormGroup>
+                </CardBody>
+                <CardFooter>
+                  <Button
+                    block
+                    className="btn-round mb-3"
+                    color="warning"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Get Started
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+      <div
+        className="full-page-background"
+        style={{
+          backgroundImage: `url(${require("assets/img/bg/fabio-mangione.jpg")})`
+        }}
+      />
     </div>
   );
 }

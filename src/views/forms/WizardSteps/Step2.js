@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -20,91 +20,87 @@ import classnames from "classnames";
 // reactstrap components
 import { Row, Col } from "reactstrap";
 
-class Wizard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      design: false,
-      code: false,
-      develop: false,
-    };
-  }
-  clickChoice = (choiceName) => {
-    this.setState({
-      [choiceName]: !this.state[choiceName],
-    });
-  };
-  render() {
-    return (
-      <>
-        <h5 className="info-text">What are you doing? (checkboxes)</h5>
-        <Row className="justify-content-center">
-          <Col lg="10">
-            <Row>
-              <Col sm="4">
-                <div
-                  className={classnames("choice", {
-                    active: this.state.design,
-                  })}
-                  data-toggle="wizard-checkbox"
-                  onClick={() => this.clickChoice("design")}
-                >
-                  <input
-                    defaultValue="Design"
-                    name="jobb"
-                    type="checkbox"
-                    defaultChecked={this.state.design}
-                  />
-                  <div className="icon">
-                    <i className="nc-icon nc-ruler-pencil" />
-                  </div>
-                  <h6>Design</h6>
+const Step2 = React.forwardRef((props, ref) => {
+  const [design, setdesign] = React.useState(false);
+  const [code, setcode] = React.useState(false);
+  const [develop, setdevelop] = React.useState(false);
+  React.useImperativeHandle(ref, () => ({
+    isValidated: undefined,
+    state: {
+      design,
+      code,
+      develop
+    }
+  }));
+  return (
+    <>
+      <h5 className="info-text">What are you doing? (checkboxes)</h5>
+      <Row className="justify-content-center">
+        <Col lg="10">
+          <Row>
+            <Col sm="4">
+              <div
+                className={classnames("choice", {
+                  active: design
+                })}
+                data-toggle="wizard-checkbox"
+                onClick={() => setdesign(!design)}
+              >
+                <input
+                  defaultValue="Design"
+                  name="jobb"
+                  type="checkbox"
+                  defaultChecked={design}
+                />
+                <div className="icon">
+                  <i className="nc-icon nc-ruler-pencil" />
                 </div>
-              </Col>
-              <Col sm="4">
-                <div
-                  className={classnames("choice", { active: this.state.code })}
-                  data-toggle="wizard-checkbox"
-                  onClick={() => this.clickChoice("code")}
-                >
-                  <input
-                    defaultValue="Code"
-                    name="jobb"
-                    type="checkbox"
-                    defaultChecked={this.state.code}
-                  />
-                  <div className="icon">
-                    <i className="nc-icon nc-laptop" />
-                  </div>
-                  <h6>Code</h6>
+                <h6>Design</h6>
+              </div>
+            </Col>
+            <Col sm="4">
+              <div
+                className={classnames("choice", { active: code })}
+                data-toggle="wizard-checkbox"
+                onClick={() => setcode(!code)}
+              >
+                <input
+                  defaultValue="Code"
+                  name="jobb"
+                  type="checkbox"
+                  defaultChecked={code}
+                />
+                <div className="icon">
+                  <i className="nc-icon nc-laptop" />
                 </div>
-              </Col>
-              <Col sm="4">
-                <div
-                  className={classnames("choice", {
-                    active: this.state.develop,
-                  })}
-                  data-toggle="wizard-checkbox"
-                  onClick={() => this.clickChoice("develop")}
-                >
-                  <input
-                    defaultValue="Develop"
-                    name="jobb"
-                    type="checkbox"
-                    defaultChecked={this.state.develop}
-                  />
-                  <div className="icon">
-                    <i className="nc-icon nc-atom" />
-                  </div>
-                  <h6>Develop</h6>
+                <h6>Code</h6>
+              </div>
+            </Col>
+            <Col sm="4">
+              <div
+                className={classnames("choice", {
+                  active: develop
+                })}
+                data-toggle="wizard-checkbox"
+                onClick={() => setdevelop(!develop)}
+              >
+                <input
+                  defaultValue="Develop"
+                  name="jobb"
+                  type="checkbox"
+                  defaultChecked={develop}
+                />
+                <div className="icon">
+                  <i className="nc-icon nc-atom" />
                 </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </>
-    );
-  }
-}
+                <h6>Develop</h6>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </>
+  );
+});
 
-export default Wizard;
+export default Step2;

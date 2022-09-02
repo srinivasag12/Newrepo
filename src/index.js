@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,30 +15,25 @@
 
 */
 import React from "react";
-import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
-import Login from "views/pages/Login.js";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "assets/scss/paper-dashboard.scss?v=1.2.0";
+import "assets/scss/paper-dashboard.scss?v=1.3.1";
 import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
-const hist = createBrowserHistory();
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
-  <Router history={hist}>
+root.render(
+  <BrowserRouter>
     <Switch>
-      <Route path="/login" component={Login}></Route>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect to="/login" />
+      <Redirect to="/admin/dashboard" />
     </Switch>
-  </Router>,
-  document.getElementById("root")
+  </BrowserRouter>
 );

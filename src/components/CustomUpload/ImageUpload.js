@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Paper Dashboard PRO React - v1.2.0
+* Paper Dashboard PRO React - v1.3.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -23,82 +23,72 @@ import { Button } from "reactstrap";
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
-class ImageUpload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      file: null,
-      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage,
-    };
-    this.handleImageChange = this.handleImageChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-  }
-  handleImageChange(e) {
+function ImageUpload(props) {
+  const [fileState, setFileState] = React.useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
+    props.avatar ? defaultAvatar : defaultImage
+  );
+  const fileInput = React.useRef();
+  const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result,
-      });
+      setFileState(file);
+      setImagePreviewUrl(reader.result);
     };
-    reader.readAsDataURL(file);
-  }
-  handleSubmit(e) {
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
+    // fileState is the file/image uploaded
+    // in this function you can save the image (fileState) on form submit
     // you have to call it yourself
-  }
-  handleClick() {
-    this.refs.fileInput.click();
-  }
-  handleRemove() {
-    this.setState({
-      file: null,
-      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage,
-    });
-    this.refs.fileInput.value = null;
-  }
-  render() {
-    return (
-      <div className="fileinput text-center">
-        <input type="file" onChange={this.handleImageChange} ref="fileInput" />
-        <div className={"thumbnail" + (this.props.avatar ? " img-circle" : "")}>
-          <img src={this.state.imagePreviewUrl} alt="..." />
-        </div>
-        <div>
-          {this.state.file === null ? (
-            <Button className="btn-round" onClick={() => this.handleClick()}>
-              {this.props.avatar ? "Add Photo" : "Select image"}
-            </Button>
-          ) : (
-            <span>
-              <Button className="btn-round" onClick={() => this.handleClick()}>
-                Change
-              </Button>
-              {this.props.avatar ? <br /> : null}
-              <Button
-                color="danger"
-                className="btn-round"
-                onClick={() => this.handleRemove()}
-              >
-                <i className="fa fa-times" />
-                Remove
-              </Button>
-            </span>
-          )}
-        </div>
+  };
+  const handleClick = () => {
+    fileInput.current.click();
+  };
+  const handleRemove = () => {
+    fileInput.current.value = null;
+    setFileState(null);
+    setImagePreviewUrl(props.avatar ? defaultAvatar : defaultImage);
+  };
+  return (
+    <div className="fileinput text-center">
+      <input type="file" onChange={handleImageChange} ref={fileInput} />
+      <div className={"thumbnail" + (props.avatar ? " img-circle" : "")}>
+        <img src={imagePreviewUrl} alt="..." />
       </div>
-    );
-  }
+      <div>
+        {fileState === null ? (
+          <Button className="btn-round" onClick={() => handleClick()}>
+            {props.avatar ? "Add Photo" : "Select image"}
+          </Button>
+        ) : (
+          <span>
+            <Button className="btn-round" onClick={() => handleClick()}>
+              Change
+            </Button>
+            {props.avatar ? <br /> : null}
+            <Button
+              color="danger"
+              className="btn-round"
+              onClick={() => handleRemove()}
+            >
+              <i className="fa fa-times" />
+              Remove
+            </Button>
+          </span>
+        )}
+      </div>
+    </div>
+  );
 }
 
 ImageUpload.propTypes = {
-  avatar: PropTypes.bool,
+  avatar: PropTypes.bool
 };
 
 export default ImageUpload;
