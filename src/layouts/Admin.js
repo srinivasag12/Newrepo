@@ -98,9 +98,9 @@ function Admin(props) {
         <Switch>{getRoutes(routes)}</Switch>
         {
           // we don't want the Footer to be rendered on full screen maps page
-          props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
-            <Footer fluid />
-          )
+          // props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
+          //   <Footer fluid />
+          // )
         }
       </div>
       <FixedPlugin

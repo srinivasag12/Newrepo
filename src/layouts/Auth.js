@@ -62,7 +62,7 @@ function Pages() {
       <div className="wrapper wrapper-full-page" ref={fullPages}>
         <div className="full-page section-image">
           <Switch>{getRoutes(routes)}</Switch>
-          <Footer fluid />
+          {/* <Footer fluid /> */}
         </div>
       </div>
     </>

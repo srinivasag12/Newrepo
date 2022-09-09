@@ -36,8 +36,11 @@ import {
   Nav,
   Container
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { isImportTypeAssertionContainer } from "typescript";
 
 function AdminNavbar(props) {
+  const history = useHistory();
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [color, setColor] = React.useState("navbar-transparent");
@@ -76,6 +79,10 @@ function AdminNavbar(props) {
       setColor("navbar-transparent");
     }
     setCollapseOpen(!collapseOpen);
+  };
+  const logOut = () => {
+    localStorage.removeItem("role");
+    history.push("/login");
   };
   return (
     <>
@@ -137,7 +144,7 @@ function AdminNavbar(props) {
             navbar
             isOpen={collapseOpen}
           >
-            <Form>
+            {/* <Form>
               <InputGroup className="no-border">
                 <Input defaultValue="" placeholder="Search..." type="text" />
                 <InputGroupAddon addonType="append">
@@ -146,9 +153,9 @@ function AdminNavbar(props) {
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
-            </Form>
+            </Form> */}
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   className="btn-magnify"
                   href="#pablo"
@@ -159,46 +166,46 @@ function AdminNavbar(props) {
                     <span className="d-lg-none d-md-block">Stats</span>
                   </p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <UncontrolledDropdown className="btn-rotate" nav>
-                <DropdownToggle
-                  aria-haspopup={true}
-                  caret
-                  color="default"
-                  data-toggle="dropdown"
-                  id="navbarDropdownMenuLink"
-                  nav
-                >
-                  <i className="nc-icon nc-bell-55" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </DropdownToggle>
-                <DropdownMenu
-                  persist
-                  aria-labelledby="navbarDropdownMenuLink"
-                  right
-                >
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                  <DropdownToggle
+                    aria-haspopup={true}
+                    caret
+                    color="default"
+                    data-toggle="dropdown"
+                    id="navbarDropdownMenuLink"
+                    nav
                   >
-                    Action
-                  </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    <i className="nc-icon nc-bell-55" />
+                    <p>
+                      <span className="d-lg-none d-md-block">Some Actions</span>
+                    </p>
+                  </DropdownToggle>
+                  <DropdownMenu
+                    persist
+                    aria-labelledby="navbarDropdownMenuLink"
+                  style={{marginTop:"-5px",marginLeft:"-285px"}}
                   >
-                    Another action
-                  </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Something else here
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Vessel AAMIRA Doc Expire due in next 30 days
+                    </DropdownItem>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Vessel ADVANTAGE SKY Review Completed
+                    </DropdownItem>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Vessel BLUE EVERTON ISM Initial certificate Expired
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               <NavItem>
                 <NavLink
                   className="btn-rotate"
@@ -211,6 +218,48 @@ function AdminNavbar(props) {
                   </p>
                 </NavLink>
               </NavItem>
+              <UncontrolledDropdown className="btn-rotate" nav>
+                <DropdownToggle
+                  aria-haspopup={true}
+                  caret
+                  color="default"
+                  data-toggle="dropdown"
+                  id="navbarDropdownMenuLink"
+                  nav
+                >
+                   <img
+                      alt="..."
+                      className="avatar border-gray"
+                      src={require("assets/img/default-avatar.png")}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  <p>
+                    <span className="d-lg-none d-md-block">Some Actions</span>
+                  </p>
+                </DropdownToggle>
+                <DropdownMenu
+                  persist
+                  aria-labelledby="navbarDropdownMenuLink"
+                  right
+                >
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => history.push("/admin/profile")}
+                  >
+                    <span>My Profile </span>
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={() => logOut()}
+                  >
+                   Log Out
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Container>

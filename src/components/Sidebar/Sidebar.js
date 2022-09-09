@@ -19,9 +19,12 @@ import { NavLink } from "react-router-dom";
 import { Nav, Collapse } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-
+import sidebar_bg from "assets/img/IRI-Yacht-Header-Image.jpg"; // Side_Bar image//
 import avatar from "assets/img/faces/ayo-ogunseinde-2.jpg";
-import logo from "assets/img/react-logo.png";
+import company_logo from "assets/img/marshall-islands-registry-logo.jpg";
+import company_logo1 from "assets/img/Anglo-Eastern.png";
+import company_logo2 from "assets/img/Ptransocean.png";
+// import logo from "assets/img/react-logo.png";
 
 var ps;
 
@@ -60,6 +63,12 @@ function Sidebar(props) {
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
+      console.log(routes);
+      if(localStorage.getItem("role") == "admin"){
+        routes =  routes.filter(function(otheratt) {
+          return otheratt.name != "Scheduling";
+          });
+        }
     return routes.map((prop, key) => {
       if (prop.redirect) {
         return null;
@@ -107,20 +116,36 @@ function Sidebar(props) {
       }
       return (
         <li className={activeRoute(prop.layout + prop.path)} key={key}>
-          <NavLink to={prop.layout + prop.path} activeClassName="">
-            {prop.icon !== undefined ? (
-              <>
-                <i className={prop.icon} />
-                <p>{prop.name}</p>
-              </>
-            ) : (
-              <>
-                <span className="sidebar-mini-icon">{prop.mini}</span>
-                <span className="sidebar-normal">{prop.name}</span>
-              </>
-            )}
-          </NavLink>
-        </li>
+          {prop.name != "My Profile" &&
+          prop.name != "Notification" &&
+          (localStorage.getItem("role") == "company"
+            ? prop.name != "Quick Info"
+            : true) ? (
+            <NavLink to={prop.layout + prop.path} activeClassName="">
+              {prop.icon !== undefined ? (
+                <>
+                  {prop.name != "My Profile" && prop.name != "Notification" ? (
+                    <>
+                      <i className={prop.icon} />
+                      <p>{prop.name}</p>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div style={{ marginLeft: "10px" }}>
+                    {/* <span className="sidebar-mini-icon">{prop.mini}</span> */}
+                    <i className={prop.mini} />
+                    <span className="sidebar-normal">{prop.name}</span>
+                  </div>
+                </>
+              )}
+            </NavLink>
+          ) : (
+            <></>
+          )}        </li>
       );
     });
   };
@@ -153,24 +178,44 @@ function Sidebar(props) {
       data-color={props.bgColor}
       data-active-color={props.activeColor}
     >
-      <div className="logo">
-        <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-mini"
-        >
-          <div className="logo-img">
-            <img src={logo} alt="react-logo" />
+       <div className="logo">
+        <a href="#" className="simple-text logo-normal">
+          <div>
+          {localStorage.getItem("role") == "admin" ? (
+              <img src={company_logo} alt="react-logo" />
+            ) : localStorage.getItem("role") == "company" ? (
+              <img
+                src={company_logo1}
+                alt="react-logo"
+                style={{ background: "white" }}
+              />
+            ):
+            <img
+                src={company_logo2}
+                alt="react-logo"
+                style={{ background: "white" }}
+              />}
           </div>
         </a>
+
         <a
+          href="#"
+          className="simple-text logo-normal"
+          style={{
+            marginLeft: "40px",
+          }}
+        >
+          OWNER PORTAL
+        </a>
+        {/* <a
           href="https://www.creative-tim.com"
           className="simple-text logo-normal"
         >
           Creative Tim
-        </a>
+        </a> */}
       </div>
 
-      <div className="sidebar-wrapper" ref={sidebar}>
+      {/* <div ref={sidebar}>
         <div className="user">
           <div className="photo">
             <img src={avatar} alt="Avatar" />
@@ -210,10 +255,25 @@ function Sidebar(props) {
               </ul>
             </Collapse>
           </div>
-        </div>
+        </div> */}
+        
+        {/* sidebar image code */}
+        <div
+        className="sidebar-wrapper"
+        ref={sidebar}
+        //  ref="sidebar"
+        style={{
+          backgroundImage: `url(${sidebar_bg})`,
+          backgroundSize: "cover",
+          height: "95vh",
+          backgroundPosition: "bottom",
+        }}
+      >
         <Nav>{createLinks(props.routes)}</Nav>
       </div>
-    </div>
+
+      </div>
+    // </div>
   );
 }
 

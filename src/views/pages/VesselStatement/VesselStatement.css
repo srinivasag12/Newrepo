@@ -1,0 +1,199 @@
+.ant-table-tbody > tr > td, .ant-table-thead > tr > th
+{
+    padding:4px;    
+}
+/* tr:nth-child(odd){ 
+    background: #f1e6ff;
+}
+tr:nth-child(even){
+    background: white;
+} */
+thead[class*="ant-table-thead"] th{
+  font-size: 15px;
+    background-color:#fafafa!important;
+    height: 20px!important;
+    /* color: white; */
+    font-weight: bold;
+    border-color: #000;
+    text-align: center;
+  }
+  .tr{
+    font-size: 1px;
+  }
+.table_btn
+{
+    margin:0 !important;
+}
+.ant-btn
+{
+    margin:0;
+}
+
+.ant-table-tbody > tr > td {
+  margin-bottom: 0px;
+}
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active, .ant-tabs-card.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-tab-active {
+  border-bottom-color: #fff;
+  background-color: #51bcda;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #ffff !important;
+  font-size: 15px;
+  text-shadow: 0 0 0.25px currentColor;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+
+
+
+
+.verticalTabActive {
+  border-radius: 100rem !important;
+  padding: 1rem !important;
+  /* font-family: "Avenir Next" !important; */
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 3rem !important;
+  color: white !important;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5) !important;
+  border: solid 3px transparent !important;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%) !important;
+
+  /* linear-gradient(101deg, #78e4ff, #ff48fa) */
+
+  background-origin: border-box !important;
+  background-clip: content-box, border-box !important;
+  box-shadow: 2px 1000px 1px #fff inset !important;
+  box-shadow: none !important;
+}
+
+.card2Grid {
+  /* margin: 0 auto; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.card3Grid {
+  /* margin: 0 auto; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  justify-content: center;
+  width: 800px !important;
+}
+
+.card7Grid {
+  /* margin: 0 auto; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  justify-content: center;
+  width: 800px !important;
+}
+
+.vesselInfoCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  justify-content: center;
+}
+
+.label {
+  color: gray;
+  font-size: small;
+  font-weight: 600;
+}
+
+.card_border {
+  border-width: 2px !important;
+  border-radius: 25px;
+  border-style: solid !important;
+  -webkit-border-image: -webkit-linear-gradient(
+    top,
+    #bea6cf 0%,
+    #7ab1df 100%
+  ) !important;
+  border-image: linear-gradient(to bottom, #bea6cf 0%, #7ab1df 100%) !important;
+  border-image-slice: 1 !important;
+}
+
+.custom-icon {
+  font-size: 25px;
+  background: #fff;
+  /* background: #4fa8e9; */
+  padding: 20px;
+  -webkit-border-radius: 1100%;
+  -moz-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 40%;
+  border: 1px solid #ccc;
+  color: #fff;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.custom-icon-dowload {
+  font-size: 15px;
+  background: #fff;
+  /* background: #4fa8e9; */
+  padding: 10px;
+  -webkit-border-radius: 1100%;
+  -moz-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 30%;
+  border: 1px solid #ccc;
+  color: #fff;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 5px;
+  height: 5px;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.fix-editor {
+  display: none;
+}
+
+.labelValue {
+  font-size: larger;
+  font-weight: 700;
+  color: rgb(0 0 0 / 64%);
+}
+
+.labelValueTab {
+  font-size: large;
+  font-weight: 500;
+  color: rgb(0 0 0 / 64%);
+}
+
+.labelTitle {
+  font-size: small;
+  font-weight: 600;
+  color: gray;
+}
+
+.card_box_shadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+}
+
+

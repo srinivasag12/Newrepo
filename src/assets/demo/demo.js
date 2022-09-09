@@ -21,7 +21,7 @@ demo = {
 
     if (image_src !== undefined) {
       image_container =
-        '<div class="full-page-background" style="background-image: url(' +
+        '<div className="full-page-background" style="background-image: url(' +
         image_src +
         ') "/>';
       $page.append(image_container);
@@ -123,8 +123,8 @@ demo = {
         swal({
           title: "Create an Event",
           html:
-            '<div class="form-group">' +
-            '<input class="form-control" placeholder="Event Title" id="input-field">' +
+            '<div className="form-group">' +
+            '<input className="form-control" placeholder="Event Title" id="input-field">' +
             "</div>",
           showCancelButton: true,
           confirmButtonClass: "btn btn-success",
@@ -300,8 +300,8 @@ demo = {
       swal({
         title: "Input something",
         html:
-          '<div class="form-group">' +
-          '<input id="input-field" type="text" class="form-control" />' +
+          '<div className="form-group">' +
+          '<input id="input-field" type="text" className="form-control" />' +
           "</div>",
         showCancelButton: true,
         confirmButtonClass: "btn btn-success",
@@ -372,7 +372,7 @@ demo = {
         var $wizard = navigation.closest(".card-wizard");
 
         first_li = navigation.find("li:first-child a").html();
-        $moving_div = $("<div class='moving-tab'></div>");
+        $moving_div = $("<div className='moving-tab'></div>");
         $moving_div.append(first_li);
         $(".card-wizard .wizard-navigation").append($moving_div);
 

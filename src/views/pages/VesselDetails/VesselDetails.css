@@ -1,0 +1,134 @@
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.bookfind {
+  width: 120px;
+  margin-top: -15px;
+  margin-bottom: -35px;
+  text-transform: uppercase;
+  border-radius: 12px;
+}
+.booknamestyle {
+  font-weight: 900;
+  font-size: 18px;
+  text-align: center;
+  font-family: -webkit-pictograph;
+  margin-top: 12px;
+}
+.bookpage {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bookbtn {
+  margin-top: 15px;
+  margin-left: 30px;
+  width: 120px;
+  font-size: 15px;
+  border-radius: 12px;
+  outline: none;
+  background-color: white;
+}
+
+.bookanvessel {
+  margin-top: 15px;
+  color: #66615b;
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 40px;
+}
+
+.bookanvesselable {
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: -13px;
+  margin-left: 40px;
+}
+
+.bookicon {
+  margin-bottom: -37px;
+  margin-top: 12px;
+  margin-left: 12px;
+  height: 15px;
+  width: 15px;
+  background-color: #51bcda;
+}
+
+.bookiconred {
+  margin-bottom: -37px;
+  margin-top: 12px;
+  margin-left: 12px;
+  height: 15px;
+  width: 15px;
+  background-color: #6bd098;
+}
+
+.bookline {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  margin-top: -5px;
+}
+.row{
+  display:flex ;
+  justify-content:space-between;
+  }
+  
+  .col-sm-3{
+  border:solid 1px black;
+  width:100%;
+  }
+
+  .bookauditcard{
+    margin-top: 20px;
+   }
+   .bookauditlabel{
+     font-weight: 500;
+     color: black;
+   }
+ .bookauditheader{
+   background-color: #51cbce;
+   margin-left: 20px;
+   margin-right: 20px;
+   margin-top: -29px;
+   padding: 15px;
+   border-radius: 6px;
+ }
+ .card-calendar{
+background-color: #51bcda;
+ }
+
+ .vesseldata{
+  color: #66615b;
+  font-weight: 500;
+  font-size: small;
+ }
+ .vesseldata2{
+color: red;
+ }
+ .ant-popover {
+  z-index: 1150 !important;
+ }
+
+ .vesseldetailtitle{
+  font-weight: 900;
+  font-size: 18px;
+  text-align: center;
+  font-family: -webkit-pictograph;
+  margin-top: 12px;
+  }
+ /*---FONT SIZES 1279px DOWN---*/
+@media (max-width: 1279px) {
+  .vesseldetailtitle {
+    font-size: 14px!important;
+  }
+}
+.navbar.navbar-absolute{
+  z-index: 1000!important;
+}
+.ant-modal-content {
+  border-radius: 10px!important;
+}

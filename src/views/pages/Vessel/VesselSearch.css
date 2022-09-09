@@ -1,0 +1,170 @@
+.search-box {
+  position: absolute;
+  top: 13%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  background: #ffff;
+  line-height: 20px;
+  padding: 5px;
+  border-radius: 60px;
+}
+.search-input {
+  background: #ffff;
+  color: rgb(109, 102, 102);
+  outline: none;
+  border: none;
+  line-height: 20px;
+  width: 0px;
+  float: left;
+  font-size: 14px;
+  transition: 0.7s ease;
+  font-family: sans-serif;
+}
+.search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background: #ffff;
+  padding: 5px;
+  border-radius: 50%;
+  float: right;
+  color: #ff5722;
+  transition: 0.4s ease;
+}
+.search-box:hover > .search-input {
+  width: 240px;
+  margin: 0px 5px;
+}
+.search-input:focus {
+  width: 240px;
+  margin: 0px 5px;
+}
+.search-box:hover > .search-btn {
+  background: #fff;
+}
+.search-input:focus + .search-btn {
+  background: #fff;
+}
+.searchbycompany{
+  width: 200px;
+  font-size: 17px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: -10px;
+}
+
+.card-list {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-gap: 10px;
+}
+
+.head {
+  width: 79vw;
+  margin: 0 auto;
+}
+
+.cardBottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.cardBottomSection1 {
+  margin: 0 auto;
+  /* display: grid; */
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  font-weight: 500;
+}
+/* .vl {
+  border-left: 0.5px solid #d9d9d9;
+  height: 100%;
+  margin-left: 50%;
+} */
+.vl {
+  border-left: 0.5px solid #d9d9d9;
+  margin-left: -4%;
+  }
+.cardBottomSection2 {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  font-weight: 500;
+}
+
+.circle:before {
+  content: "\25CF";
+  font-size: 20px;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+
+.vesselicon-shape {
+  padding: 12px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; }
+  .vesselicon-shape i, .icon-shape svg {
+    font-size: 1.25rem; }
+  .vesselicon-shape.icon-lg i, .icon-shape.icon-lg svg {
+    font-size: 1.625rem; }
+  .vesselicon-shape.icon-sm i, .icon-shape.icon-sm svg {
+    font-size: .875rem; }
+  .vesselicon-shape svg {
+    width: 30px;
+    height: 30px; }
+  
+    /* .card:hover {
+      transform: scale(0.9, 0.9);
+      box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+        -5px -5px 30px 15px rgba(0,0,0,0.22);
+    } */
+
+
+    .vesselicon-box {
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      background: #1890ff;
+      color: #fff;
+      border-radius: 0.5rem;
+      /* margin-left: auto; */
+      line-height: 55px;
+    }
+    .vesseDetailslicon-shape{
+      padding: 5px;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%; }
+      .vesseDetailslicon-shape i, .icon-shape svg {
+        font-size: 0.55rem; }
+      .vesseDetailslicon-shape.icon-lg i, .icon-shape.icon-lg svg {
+        font-size: 1.625rem; }
+      .vesseDetailslicon-shape.icon-sm i, .icon-shape.icon-sm svg {
+        font-size: .875rem; }
+      .vesseDetailslicon-shape svg {
+        width: 30px;
+        height: 30px; }
+    
+
+        .circle:before {
+          content: "\25CF";
+          font-size: 20px;
+        }
+        
+        .overviewValues {
+          font-weight: 500;
+        }
+        

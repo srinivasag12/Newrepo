@@ -162,8 +162,9 @@
             &.active > a[data-toggle="collapse"] i,
             &.active > a[data-toggle="collapse"] ~ div > ul > li.active i,
             &.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
-              color: $danger-color;
-
+              // color: $danger-color;
+              color:#51bcda;
+              
               & + div .nav .active a {
                 background-color: transparent;
                 box-shadow: none;

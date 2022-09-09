@@ -1,0 +1,78 @@
+.mt-n4 {
+    margin-top: -1.5rem !important;
+  }
+  .icon-shapes{
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    border-radius: 0.5rem;
+  }
+  .shadow-info {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4) !important;
+  }
+
+  .main-panel>.dashboard-content {
+    margin-top: 50px !important;
+  }
+  /*---FONT SIZES 1279px DOWN---*/
+@media (max-width: 1279px) {
+    .textSizeResolution {
+  
+      font-size: 10px !important;
+  
+    }
+  
+    .textmoreResolution {
+  
+      font-size: 8px !important;
+  
+      margin-top: 0px !important;
+  
+    }
+  
+  }
+
+  .css-1ujykiq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+
+    color: #507e99 !important;
+  
+    background-color: #a2e3f561 !important;
+    border-radius: 10px;
+    border: 2px solid #a2e3f5 !important;
+  }
+  
+  
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+  
+  .ps .ps__rail-x:hover,
+  .ps .ps__rail-y:hover,
+  .ps .ps__rail-x:focus,
+  .ps .ps__rail-y:focus,
+  .ps .ps__rail-x.ps--clicking,
+  .ps .ps__rail-y.ps--clicking {
+    visibility: hidden !important;
+    opacity: 0;
+  }
+  
+  .ps--active-x>.ps__rail-x,
+  .ps--active-y>.ps__rail-y {
+    visibility: hidden !important;
+    opacity: 0;
+  }
