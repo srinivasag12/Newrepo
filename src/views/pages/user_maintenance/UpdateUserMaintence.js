@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, Row, Col, Modal, ModalBody, NavLink } from "reactstrap";
-import { Button, Radio, notification } from "antd";
+import { Button, Radio, notification,Table} from "antd";
 import "./UserMaintenance.css";
 import { forwardRef } from "react";
 import { Input, Tabs } from "antd";
@@ -32,7 +32,7 @@ import company_logo2 from "assets/img/Ptransocean.png";
 import company_logo3 from "assets/img/abc.jpg";
 import { useHistory } from "react-router-dom";
 import { message, Upload } from 'antd';
-// import UserComapanyDetails from "./UserComapanyDetails";
+import UserComapanyDetails from "./UserComapanyDetails";
 
 const { TabPane } = Tabs;
 
@@ -263,48 +263,7 @@ function UpdateUserMaintence() {
                      aria-hidden="true" onClick={() => setModal(true)}></i>
                  
                   },
-                  // {
-                  //   companyName: "FEDERAL ASAHI.",
-                  //   imoNumber: "9564413",
-                  //   officialId: 7307,
-                  //   country: "Canada",
-                  //   vessels: 2,
-                  //   auditsOverDue: 0,
-                  //   auditsDue: 0,
-                  //   findingsOverDue: 5,
-                  //   findingsDue: 0,
-                  //   expiringCertificates: 10,
-                  //   address: "112 Robinson Road #04-04, 068925 SG",
-                  // },
-                  // {
-                  //   companyName: "3116 Ltd.",
-                  //   imoNumber: "1185412",
-                  //   officialId: 8307,
-                  //   country: "Cayman Island",
-                  //   vessels: 2,
-                  //   auditsOverDue: 0,
-                  //   auditsDue: 0,
-                  //   findingsOverDue: 5,
-                  //   findingsDue: 0,
-                  //   expiringCertificates: 10,
-                  //   status: <button style={{marginLeft:"-10px",width: "85px"}}
-                  //   className="bookbtn btn-outline-danger"
-                  // >
-                  //   INACTIVE
-                  // </button>
-                  // },
-                  // {
-                  //   companyName: "A&L CF June(3) Limited",
-                  //   imoNumber: "1261412",
-                  //   officialId: 9088,
-                  //   country: "United Kingdom",
-                  //   vessels: 1,
-                  //   auditsOverDue: 0,
-                  //   auditsDue: 0,
-                  //   findingsOverDue: 5,
-                  //   findingsDue: 0,
-                  //   expiringCertificates: 10,
-                  // },
+                  
                  
                 ]}
                 detailPanel={(rowData) => {
@@ -315,7 +274,7 @@ function UpdateUserMaintence() {
                         padding: "5px",
                       }}
                     >
-                      {/* <UserComapanyDetails /> */}
+                      <UserComapanyDetails />
 
                     </div>
                   );
@@ -329,9 +288,7 @@ function UpdateUserMaintence() {
                   search: true,
                   paging: false,
                   rowStyle: (rowData) => ({
-                    // backgroundColor:
-                    //   selectedRow === rowData.tableData.id ? "#59736c" : "",
-                    // color: selectedRow === rowData.tableData.id ? "white" : "",
+                   
                     fontWeight: "600",
                     fontSize: "14px",
                     borderBottom: "5px solid #f0f0f0",
@@ -340,14 +297,9 @@ function UpdateUserMaintence() {
                     boxShadow:
                       "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
 
-                    // margin: "10px",
-                    // padding: "10px",
-                    // borderCollapse: "separate",
-                    // borderSpacing: "0px 4px",
+                
                   }),
                   headerStyle: {
-                    //backgroundColor: "#9fa0ff",
-                    //fontWeight: "bold",
                     fontSize: "14px",
                     color: "cornflowerblue",
                   },
@@ -471,7 +423,7 @@ function UpdateUserMaintence() {
                     Clear
                   </Button>
 
-                  <Button type="primary" size="default" >
+                  <Button type="primary" size="default" style={{backgroundColor:"#1890ff"}}>
                     Save
                   </Button>
                   <div></div>
@@ -612,7 +564,7 @@ function UpdateUserMaintence() {
                     Clear
                   </Button>
 
-                  <Button type="primary" size="default" 
+                  <Button type="primary" size="default" style={{backgroundColor:"#1890ff"}}
                    onClick={() => setModal(false)}>
                     Save
                   </Button>

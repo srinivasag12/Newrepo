@@ -21,7 +21,8 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import Search from "@material-ui/icons/Search";
 import { Select } from "antd";
 import UpdateUserMaintence from "./UpdateUserMaintence"
-
+import UserOwnerupdate from "./UserOwnerupdate"
+import AuditCreateUpdate from "./AuditCreateUpdate"
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -169,20 +170,19 @@ function UserMaintenance() {
           {(() => {
             if (role === "Auditor") {
               return (
-                // <AuditCreateUpdate/>
-                <div>demo</div>
+                 <AuditCreateUpdate/>
+               
               );
             } else if (role === "Company") {
               return (
-                <div>demo1</div>
-              //  <UpdateUserMaintence />
+               <UpdateUserMaintence />
               );
             }
           })()}
         </div>
       ) : (
-      //  <UserOwnerupdate/>
-      <div>demo2</div>
+       <UserOwnerupdate/>
+      // <div>demo2</div>
       )}
     </div>
   );
