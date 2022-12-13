@@ -416,13 +416,14 @@ function AuditCreateUpdate() {
                 isOpen={modal1} toggle={() => setModal(false)}>
                 <div className="modal-header justify-content-center">
                     <button
+                     style={{float:"right"}}
                         className="close"
                         type="button"
                         onClick={() => setModal(false)}
                     >
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
-                    <h4 className="title title-up">CREATE AUDITOR</h4>
+                    <h4 className="title title-up">UPDATE AUDITOR</h4>
                 </div>
                 {/* <Card> */}
                     {/* <div className="right">

@@ -142,7 +142,7 @@ function VesselStatement() {
                       md="3"
                       className="bookfind"
                       style={{backgroundColor:res.color === "danger" ? "rgb(229, 86, 86)" : res.color === "warning" ? "#fbc658" : res.color === "success" ? "rgb(107, 208, 152)" : "#51bcda",
-                         height: "90px",marginTop:"-15px",marginLeft:"-4px"}}
+                         height: "90px",marginTop:"-15px",marginLeft:"-4px",display:" flex",justifyContent:" center"}}
                     >
                       { res.color === "info" ? 
                         <i className= "fa fa-ship fa-2x" aria-hidden="true" style={icontyle} /> :

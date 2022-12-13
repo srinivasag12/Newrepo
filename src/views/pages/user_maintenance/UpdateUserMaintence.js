@@ -440,13 +440,14 @@ function UpdateUserMaintence() {
           isOpen={modal1} toggle={() => setModal(false)}>
              <div className="modal-header justify-content-center">
                     <button
+                     style={{float:"right"}}
                         className="close"
                         type="button"
                         onClick={() => setModal(false)}
                     >
                         <i className="fa fa-times" aria-hidden="true"></i>
                     </button>
-                    <h4 className="title title-up">CREATE COMPANY</h4>
+                    <h4 className="title title-up">UPDATE COMPANY</h4>
                 </div>
          {/* <div className="right" align="right">
                 <Button

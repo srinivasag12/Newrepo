@@ -495,6 +495,23 @@ function Vessel(props) {
         </div>
 
 
+
+{/* <div style={{height:"80px",backgroundColor:"#40a9ff8c"}}>
+</div>
+<div style={{width:"120px",height:"100px",backgroundColor:"#f5f5f5",marginLeft:"50px",borderRadius:"100px",marginTop:"-90px"}}>
+<div  style={{width:"100px",height:"100px",backgroundColor:"white",borderRadius:"100px",marginLeft:"10px",border:"1px solid #96d0ff"}}>
+
+
+<i class="fa fa-user fa-5x" aria-hidden="true" 
+style={{width:"88px",height:"88px",borderRadius:"100px",marginLeft:"5px",marginTop:"5px",backgroundColor:"#40a9ff8c",color:"white",
+paddingTop:"8px",paddingLeft:"20px"}}></i>
+</div>
+</div> */}
+
+
+
+
+
         <div style={{ backgroundColor: "#f5f5f5", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gridGap: "10px" }}>
           {filteredVesselList.map((res) => (
             <Card style={{ borderRadius: "10px", paddingBottom: "0.5rem", marginBottom: "16px", padding: "15px", paddingRight: "0.5rem" }} >
