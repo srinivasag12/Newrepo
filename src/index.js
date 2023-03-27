@@ -15,7 +15,8 @@
 
 */
 import React from "react";
-import ReactDOM from "react-dom/client";
+// import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import AuthLayout from "layouts/Auth.js";
@@ -27,16 +28,19 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+// const root = ReactDOM.createRoot(document.getElementById("root"));
 const hist = createBrowserHistory();
-root.render(
+// root.render(
+ReactDOM.render(
   <BrowserRouter history={hist}>
- <Switch>
+    <Switch>
       <Route path="/login" component={Login}></Route>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       {/* <Route path="/vesselMoreInfo" render={(props) => <VesselMoreInfo {...props} />} /> */}
       <Redirect to="/login" />
     </Switch>
-  </BrowserRouter>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
+// );

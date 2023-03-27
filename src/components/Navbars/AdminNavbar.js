@@ -34,10 +34,10 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
-import { isImportTypeAssertionContainer } from "typescript";
+// import { isImportTypeAssertionContainer } from "typescript";
 
 function AdminNavbar(props) {
   const history = useHistory();
@@ -105,7 +105,7 @@ function AdminNavbar(props) {
             </div>
             <div
               className={classnames("navbar-toggle", {
-                toggled: sidebarOpen
+                toggled: sidebarOpen,
               })}
             >
               <button
@@ -168,44 +168,44 @@ function AdminNavbar(props) {
                 </NavLink>
               </NavItem> */}
               <UncontrolledDropdown className="btn-rotate" nav>
-                  <DropdownToggle
-                    aria-haspopup={true}
-                    caret
-                    color="default"
-                    data-toggle="dropdown"
-                    id="navbarDropdownMenuLink"
-                    nav
+                <DropdownToggle
+                  aria-haspopup={true}
+                  caret
+                  color="default"
+                  data-toggle="dropdown"
+                  id="navbarDropdownMenuLink"
+                  nav
+                >
+                  <i className="nc-icon nc-bell-55" />
+                  <p>
+                    <span className="d-lg-none d-md-block">Some Actions</span>
+                  </p>
+                </DropdownToggle>
+                <DropdownMenu
+                  persist
+                  aria-labelledby="navbarDropdownMenuLink"
+                  style={{ marginTop: "-5px", marginLeft: "-285px" }}
+                >
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
                   >
-                    <i className="nc-icon nc-bell-55" />
-                    <p>
-                      <span className="d-lg-none d-md-block">Some Actions</span>
-                    </p>
-                  </DropdownToggle>
-                  <DropdownMenu
-                    persist
-                    aria-labelledby="navbarDropdownMenuLink"
-                  style={{marginTop:"-5px",marginLeft:"-285px"}}
+                    Vessel AAMIRA Doc Expire due in next 30 days
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
                   >
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel AAMIRA Doc Expire due in next 30 days
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel ADVANTAGE SKY Review Completed
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Vessel BLUE EVERTON ISM Initial certificate Expired
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
+                    Vessel ADVANTAGE SKY Review Completed
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Vessel BLUE EVERTON ISM Initial certificate Expired
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
               <NavItem>
                 <NavLink
                   className="btn-rotate"
@@ -227,16 +227,16 @@ function AdminNavbar(props) {
                   id="navbarDropdownMenuLink"
                   nav
                 >
-                   <img
-                      alt="..."
-                      className="avatar border-gray"
-                      src={require("assets/img/default-avatar.png")}
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        borderRadius: "50%",
-                      }}
-                    />
+                  <img
+                    alt="..."
+                    className="avatar border-gray"
+                    src={require("assets/img/default-avatar.png")}
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      borderRadius: "50%",
+                    }}
+                  />
                   <p>
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
@@ -252,11 +252,8 @@ function AdminNavbar(props) {
                   >
                     <span>My Profile </span>
                   </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={() => logOut()}
-                  >
-                   Log Out
+                  <DropdownItem href="#pablo" onClick={() => logOut()}>
+                    Log Out
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
