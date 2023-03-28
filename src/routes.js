@@ -101,8 +101,8 @@ const routes = [
         layout: "/admin"
       },
       {
-        path: "/bookAnAudit",
-        name: "BookAnAudit",
+        path: "/bookAuditOrInspection",
+        name: "Book Audit/Inspection",
         mini: "fa fa-calendar-check-o",
         component: BookAnAudit,
         layout: "/admin"
@@ -111,7 +111,7 @@ const routes = [
   },
   {
     path: "/userMaintenance",
-    name: "UserMaintenance",
+    name: "User Maintenance",
     icon: "nc-icon nc-circle-10",
     component: UserMaintenance,
     layout: "/admin"

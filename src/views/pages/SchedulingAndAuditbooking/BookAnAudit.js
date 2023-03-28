@@ -2,25 +2,118 @@ import React, { useState, useEffect } from "react";
 import "./BookAnAudit.css";
 
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+import Notify from "react-notification-alert";
+import { useRef } from "react";
+import "react-notification-alert/dist/animate.css";
+
+const userList = [
+  {
+    userName: "SANDEEP K",
+    userId: 1,
+    status: 1,
+    statusDesc: "Available",
+    roles: ["Auditor", "Inspector"],
+  },
+  {
+    userName: "RUPESH K",
+    userId: 2,
+    status: 1,
+    statusDesc: "Available",
+    roles: ["Auditor", "Inspector"],
+  },
+  {
+    userName: "Deepak",
+    userId: 3,
+    status: 0,
+    statusDesc: "Not Available",
+    roles: ["Auditor"],
+  },
+  {
+    userName: "DWAYNE",
+    userId: 125,
+    status: 2,
+    statusDesc: "On Leave",
+    roles: ["Auditor", "Inspector"],
+  },
+  {
+    userName: "MICHAEL",
+    userId: 120,
+    status: 2,
+    statusDesc: "On Leave",
+    roles: ["Auditor", "Inspector"],
+  },
+  {
+    userName: "KIRAN",
+    userId: 17,
+    status: 1,
+    statusDesc: "Available",
+    roles: ["Inspector"],
+  },
+  {
+    userName: "JOHN",
+    userId: 12,
+    status: 2,
+    statusDesc: "On Leave",
+    roles: ["Inspector"],
+  },
+  {
+    userName: "TRAVIS",
+    userId: 12,
+    status: 0,
+    statusDesc: "Not Available",
+    roles: ["Inspector"],
+  },
+];
+
+const notifySuccess = (notifyRef, message, duration = 2) => {
+  notifyRef.current?.notificationAlert({
+    place: "tr",
+    message: message,
+    type: "success",
+    autoDismiss: duration,
+  });
+};
+
+const notifyError = (notifyRef, error, duration = 2) => {
+  notifyRef.current?.notificationAlert({
+    place: "tr",
+    message: error,
+    type: "danger",
+    autoDismiss: duration,
+    icon: "now-ui-icons ui-1_simple-remove"
+  });
+};
 
 const BookAnAudit = (props) => {
-  const [eneteredVesselName, setEneteredVesselName] = useState("");
-  const [eneteredVesselImo, setEneteredVesselImo] = useState("");
-  const [eneteredOfficeNo, setEneteredOfficeNo] = useState("");
-  const [eneteredVesselType, setEneteredVesselType] = useState("");
-  const [eneteredLocation, setEneteredLocation] = useState("");
-  const [eneteredETA, setEneteredETA] = useState("");
-  const [eneteredEID, setEneteredEID] = useState("");
-  const [eneteredPortAgentName, setEneteredPortAgentName] = useState("");
-  const [eneteredPortAgentEmail, setEneteredPortAgentEmail] = useState("");
-  const [enteredPortAgentPhone, setEneteredPortAgentPhone] = useState("");
-  const [eneteredAuditType, setEneteredAuditType] = useState("");
-  const [eneteredAuditSubType, setEneteredAuditSubType] = useState("");
-  const [eneteredCertificateExpiryDate, setEneteredPortCertificateExpiryDate] =
+  const [enteredVesselName, setEnteredVesselName] = useState("");
+  const [enteredVesselImo, setEnteredVesselImo] = useState("");
+  const [enteredOfficeNo, setEnteredOfficeNo] = useState("");
+  const [enteredVesselType, setEnteredVesselType] = useState("");
+  const [enteredLocation, setEnteredLocation] = useState("");
+  const [enteredETA, setEnteredETA] = useState("");
+  const [enteredEID, setEnteredEID] = useState("");
+  const [enteredPortAgentName, setEnteredPortAgentName] = useState("");
+  const [enteredPortAgentEmail, setEnteredPortAgentEmail] = useState("");
+  const [enteredPortAgentPhone, setEnteredPortAgentPhone] = useState("");
+  const [enteredAuditType, setEnteredAuditType] = useState("");
+  const [enteredAuditSubType, setEnteredAuditSubType] = useState("");
+  const [enteredCertificateExpiryDate, setEnteredPortCertificateExpiryDate] =
     useState("");
-  const [eneteredPICName, setEneteredPICName] = useState("");
-  const [eneteredPICEmail, setEneteredPICEmail] = useState("");
-  const [eneteredPICPhone, setEneteredPICPhone] = useState("");
+  const [enteredPICName, setEnteredPICName] = useState("");
+  const [enteredPICEmail, setEnteredPICEmail] = useState("");
+  const [enteredPICPhone, setEnteredPICPhone] = useState("");
+
+  const [audInspType, setAudInspType] = useState("");
+  const [inspectionType, setInspectionType] = useState("");
+  const [audOrInsp, setAudOrInsp] = useState("");
+
+  const notifyRef = useRef();
+  const userType =
+    audInspType === ""
+      ? "User"
+      : audInspType === "MSC"
+      ? "Auditor"
+      : "Inspector";
 
   useEffect(() => {
     console.log("useEffect", props);
@@ -28,117 +121,178 @@ const BookAnAudit = (props) => {
 
   const vesselNameChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredVesselName(event.target.value);
+    setEnteredVesselName(event.target.value);
   };
 
   const vesselImoChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredVesselImo(event.target.value);
+    setEnteredVesselImo(event.target.value);
   };
 
   const officeNoChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredOfficeNo(event.target.value);
+    setEnteredOfficeNo(event.target.value);
   };
 
   const vesselTypeChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredVesselType(event.target.value);
+    setEnteredVesselType(event.target.value);
   };
 
   const locationChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredLocation(event.target.value);
+    setEnteredLocation(event.target.value);
   };
 
   const etaChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredETA(event.target.value);
+    setEnteredETA(event.target.value);
   };
 
   const eidChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredEID(event.target.value);
+    setEnteredEID(event.target.value);
   };
 
   const portAgentNameChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPortAgentName(event.target.value);
+    setEnteredPortAgentName(event.target.value);
   };
 
   const portAgentEmailChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPortAgentEmail(event.target.value);
+    setEnteredPortAgentEmail(event.target.value);
   };
 
   const portAgentPhoneChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPortAgentPhone(event.target.value.replace(/\+|-/gi, ""));
+    setEnteredPortAgentPhone(event.target.value.replace(/\+|-/gi, ""));
   };
   const auditTypeChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredAuditType(event.target.value);
+    setEnteredAuditType(event.target.value);
   };
   const auditSubTypeChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredAuditSubType(event.target.value);
+    setEnteredAuditSubType(event.target.value);
   };
   const certificateExpiryDateChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPortCertificateExpiryDate(event.target.value);
+    setEnteredPortCertificateExpiryDate(event.target.value);
   };
   const pICNameChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPICName(event.target.value);
+    setEnteredPICName(event.target.value);
   };
   const pICEmailChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPICEmail(event.target.value);
+    setEnteredPICEmail(event.target.value);
   };
   const pICPhoneChangeHandler = (event) => {
     console.log(event.target.value);
-    setEneteredPICPhone(event.target.value);
+    setEnteredPICPhone(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-
+    let error = false;
     const expenseData = {
-      vesselName: eneteredVesselName,
-      vesselImo: eneteredVesselImo,
-      officeNo: eneteredOfficeNo,
-      vesselType: eneteredVesselType,
-      location: eneteredLocation,
-      eta: new Date(eneteredETA),
-      eid: new Date(eneteredEID),
-      portAgentName: eneteredPortAgentName,
-      portAgentEmail: eneteredPortAgentEmail,
+      vesselName: enteredVesselName,
+      vesselImo: enteredVesselImo,
+      officeNo: enteredOfficeNo,
+      vesselType: enteredVesselType,
+      location: enteredLocation,
+      eta: new Date(enteredETA),
+      eid: new Date(enteredEID),
+      portAgentName: enteredPortAgentName,
+      portAgentEmail: enteredPortAgentEmail,
       portAgentPhone: enteredPortAgentPhone,
-      auditType: eneteredAuditType,
-      auditSubType: eneteredAuditSubType,
-      certificateExpiryDate: new Date(eneteredCertificateExpiryDate),
-      pICName: eneteredPICName,
-      pICEmail: eneteredPICEmail,
-      pICPhone: eneteredPICPhone,
+      auditType: enteredAuditType,
+      auditSubType: enteredAuditSubType,
+      certificateExpiryDate: new Date(enteredCertificateExpiryDate),
+      pICName: enteredPICName,
+      pICEmail: enteredPICEmail,
+      pICPhone: enteredPICPhone,
     };
 
     console.log("Submitted Data ", expenseData);
-    setEneteredVesselName("");
-    setEneteredVesselImo("");
-    setEneteredOfficeNo("");
-    setEneteredVesselType("");
-    setEneteredLocation("");
-    setEneteredETA("");
-    setEneteredEID("");
-    setEneteredPortAgentName("");
-    setEneteredPortAgentEmail("");
-    setEneteredPortAgentPhone("");
-    setEneteredPICPhone("");
-    setEneteredPICEmail("");
-    setEneteredPICName("");
-    setEneteredPortCertificateExpiryDate("");
-    setEneteredAuditSubType("");
-    setEneteredAuditType("");
+
+    if (enteredVesselName === "") {
+      return notifyError(notifyRef, "Please select a Vessel");
+    }
+    if (enteredVesselImo === "") {
+      return notifyError(notifyRef, "Please enter the Vessel Imo number");
+    }
+    if (enteredOfficeNo === "") {
+      return notifyError(notifyRef, "Please enter the Office number");
+    }
+    if (enteredVesselType === "") {
+      return notifyError(notifyRef, "Please enter the Vessel type");
+    }
+    if (enteredLocation === "") {
+      return notifyError(notifyRef, "Please enter the Location");
+    }
+    if (enteredETA === "") {
+      return notifyError(notifyRef, "Please set the ETA");
+    }
+    if (enteredEID === "") {
+      return notifyError(notifyRef, "Please set the EID");
+    }
+    if (enteredPortAgentName === "") {
+      return notifyError(notifyRef, "Please enter the Port Agent Name!");
+    }
+    if (enteredPortAgentEmail === "") {
+      return notifyError(notifyRef, "Please enter the Port Agent Email!");
+    }
+    if (enteredPortAgentPhone === "") {
+      return notifyError(notifyRef, "Please enter the Port Agent Phone!");
+    }
+    if (enteredPICPhone === "") {
+      return notifyError(notifyRef, "Please enter the PIC Phone!");
+    }
+    if (enteredPICEmail === "") {
+      return notifyError(notifyRef, "Please enter the PIC Email!");
+    }
+    if (enteredPICName === "") {
+      return notifyError(notifyRef, "Please enter the PIC Name!");
+    }
+    if (enteredCertificateExpiryDate === "") {
+      return notifyError(notifyRef, "Please set the Certificate Expiry Date!");
+    }
+    if (audInspType === "") {
+      return notifyError(notifyRef, "Please select Audit/ Inspection Type");
+    }
+    if (audOrInsp === "") {
+      return notifyError(notifyRef, "Please select the " + userType);
+    }
+    if (audInspType === "MSC" && enteredAuditSubType === "") {
+      return notifyError(notifyRef, "Please select Audit Type");
+    }
+    if (audInspType === "MSC" && enteredAuditType === "") {
+      return notifyError(notifyRef, "Please select Audit Sub-Type");
+    }
+
+    setEnteredVesselName("");
+    setEnteredVesselImo("");
+    setEnteredOfficeNo("");
+    setEnteredVesselType("");
+    setEnteredLocation("");
+    setEnteredETA("");
+    setEnteredEID("");
+    setEnteredPortAgentName("");
+    setEnteredPortAgentEmail("");
+    setEnteredPortAgentPhone("");
+    setEnteredPICPhone("");
+    setEnteredPICEmail("");
+    setEnteredPICName("");
+    setEnteredPortCertificateExpiryDate("");
+    setEnteredAuditSubType("");
+    setEnteredAuditType("");
+
+    notifySuccess(
+      notifyRef,
+      `${audInspType === "MSC" ? "AUDIT" : "INSPECTION"} created successfully!`
+    );
   };
   return (
     <div className="content">
@@ -151,7 +305,7 @@ const BookAnAudit = (props) => {
             <Card className="card-calendar">
               <div className="bookauditheader">
                 <CardHeader className="bookauditheader">
-                  <h4 className="cardTitleWhite">BOOK AN AUDIT</h4>
+                  <h4 className="cardTitleWhite">BOOK AN AUDIT/ INSPECTION</h4>
                   {/* <p class ="cardCategoryWhite">Complete your profile</p> */}
                 </CardHeader>
               </div>
@@ -161,46 +315,51 @@ const BookAnAudit = (props) => {
                     <div className="row">
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>Vessel Name</label>
-                        {localStorage.getItem("role") == "owner1" ?
-                        <select
-                          className="form-control"
-                          onChange={vesselNameChangeHandler}
-                          value={
-                            props.location.state === "dtls"
-                              ? "DEEPWATER PROTEUS"
-                              : eneteredVesselName
-                          }
-                        >
-                          <option value="" disabled selected hidden>
-                            Select Your Vessel
-                          </option>
-                          <option value="adventurer">DEEPWATER PROTEUS</option>
-                          <option value="DEEPWATER PROTEUS">DEEPWATER POSEIDON</option>
-                          <option value="advantagesummer">
-                          DHIRUBHAI DEEPWATER KG2
-                          </option>
-                          <option value="advantage">DEEPWATER PONTUS</option>
-                        </select>
-                        :
-                        <select
-                          className="form-control"
-                          onChange={vesselNameChangeHandler}
-                          value={
-                            props.location.state === "dtls"
-                              ? "GH CITATION"
-                              : eneteredVesselName
-                          }
-                        >
-                          <option value="" disabled selected hidden>
-                            Select Your Vessel
-                          </option>
-                          <option value="adventurer">FEDERAL TAMBO</option>
-                          <option value="GH CITATION">BALTIC LEOPARD</option>
-                          <option value="advantagesummer">
-                          NAVIGARE BACCA
-                          </option>
-                          <option value="advantage">SEAMAX FAIRFIELD</option>
-                        </select>}
+                        {localStorage.getItem("role") == "owner1" ? (
+                          <select
+                            className="form-control"
+                            onChange={vesselNameChangeHandler}
+                            value={
+                              props.location.state === "dtls"
+                                ? "DEEPWATER PROTEUS"
+                                : enteredVesselName
+                            }
+                          >
+                            <option value="" disabled selected hidden>
+                              Select Your Vessel
+                            </option>
+                            <option value="adventurer">
+                              DEEPWATER PROTEUS
+                            </option>
+                            <option value="DEEPWATER PROTEUS">
+                              DEEPWATER POSEIDON
+                            </option>
+                            <option value="advantagesummer">
+                              DHIRUBHAI DEEPWATER KG2
+                            </option>
+                            <option value="advantage">DEEPWATER PONTUS</option>
+                          </select>
+                        ) : (
+                          <select
+                            className="form-control"
+                            onChange={vesselNameChangeHandler}
+                            value={
+                              props.location.state === "dtls"
+                                ? "GH CITATION"
+                                : enteredVesselName
+                            }
+                          >
+                            <option value="" disabled selected hidden>
+                              Select Your Vessel
+                            </option>
+                            <option value="adventurer">FEDERAL TAMBO</option>
+                            <option value="GH CITATION">BALTIC LEOPARD</option>
+                            <option value="advantagesummer">
+                              NAVIGARE BACCA
+                            </option>
+                            <option value="advantage">SEAMAX FAIRFIELD</option>
+                          </select>
+                        )}
                       </div>
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>Vessel Imo</label>
@@ -213,7 +372,7 @@ const BookAnAudit = (props) => {
                           value={
                             props.location.state === "dtls"
                               ? "9722041"
-                              : eneteredVesselImo
+                              : enteredVesselImo
                           }
                         />
                       </div>
@@ -228,7 +387,7 @@ const BookAnAudit = (props) => {
                           value={
                             props.location.state === "dtls"
                               ? "7195"
-                              : eneteredOfficeNo
+                              : enteredOfficeNo
                           }
                         />
                       </div>
@@ -244,7 +403,7 @@ const BookAnAudit = (props) => {
                           value={
                             props.location.state === "dtls"
                               ? "Bulk carrier"
-                              : eneteredVesselType
+                              : enteredVesselType
                           }
                         />
                       </div>
@@ -254,7 +413,7 @@ const BookAnAudit = (props) => {
                           className="form-control"
                           type="text"
                           onChange={locationChangeHandler}
-                          value={eneteredLocation}
+                          value={enteredLocation}
                         />
                       </div>
                       <div className="col-sm-4">
@@ -265,7 +424,7 @@ const BookAnAudit = (props) => {
                           min="2019-01-01"
                           max="2022-12-31"
                           onChange={etaChangeHandler}
-                          value={eneteredETA}
+                          value={enteredETA}
                         />
                       </div>
                     </div>
@@ -279,7 +438,7 @@ const BookAnAudit = (props) => {
                           min="2019-01-01"
                           max="2022-12-31"
                           onChange={eidChangeHandler}
-                          value={eneteredEID}
+                          value={enteredEID}
                         />
                       </div>
                       <div className="col-sm-4">
@@ -290,7 +449,7 @@ const BookAnAudit = (props) => {
                           className="form-control"
                           type="text"
                           onChange={portAgentNameChangeHandler}
-                          value={eneteredPortAgentName}
+                          value={enteredPortAgentName}
                         />
                       </div>
                       <div className="col-sm-4">
@@ -301,7 +460,7 @@ const BookAnAudit = (props) => {
                           className="form-control"
                           type="text"
                           onChange={portAgentEmailChangeHandler}
-                          value={eneteredPortAgentEmail}
+                          value={enteredPortAgentEmail}
                         />
                       </div>
                     </div>
@@ -320,40 +479,178 @@ const BookAnAudit = (props) => {
                         />
                       </div>
                       <div className="col-sm-4">
-                        <label style={{ color: "black" }}>Audit Type</label>
+                        <label style={{ color: "black" }}>
+                          Audit/ Inspection Type
+                        </label>
                         <select
                           className="form-control"
-                          onChange={auditTypeChangeHandler}
-                          value={eneteredAuditType}
+                          value={audInspType}
+                          onChange={({ target: { value } }) => {
+                            setAudInspType(value);
+                            setAudOrInsp("");
+                          }}
                         >
-                          <option value="" disabled selected hidden>
-                            Select Your Option
+                          <option value="" disabled>
+                            Select a type
                           </option>
-                          <option value="adventurer">ISM</option>
-                          <option value="advantagesummer">ISPS</option>
-                          <option value="advantage">MLC</option>
+                          <option value="MSC">MSC</option>
+                          <option value="INSPECTION">Inspection</option>
                         </select>
                       </div>
                       <div className="col-sm-4">
-                        <label style={{ color: "black" }}>Audit Sub Type</label>
+                        <label style={{ color: "black" }}>
+                          {`Select ${userType.toUpperCase()}`}
+                        </label>
                         <select
                           className="form-control"
-                          onChange={auditSubTypeChangeHandler}
-                          value={eneteredAuditSubType}
+                          value={audOrInsp}
+                          onChange={({ target: { value } }) =>
+                            setAudOrInsp(value)
+                          }
+                          disabled={audInspType === ""}
                         >
-                          <option value="" disabled selected hidden>
-                            Select Your Option
-                          </option>
-                          <option value="adventurer">INITIAL</option>
-                          <option value="advantagesummer">INTERIM</option>
-                          <option value="advantage">INTERMEDIATE</option>
-                          <option value="advantagesummer">RENEWAL</option>
-                          <option value="advantage">ADDITIONAL</option>
+                          <option
+                            value=""
+                            disabled
+                          >{`Select ${userType.toUpperCase()}`}</option>
+                          <optgroup
+                            label={`Available ${userType.toUpperCase()}S`}
+                            style={{
+                              backgroundColor: "#9af5a6",
+                              textTransform: "uppercase",
+                              color: "green",
+                            }}
+                          >
+                            {userList
+                              .filter((user) => {
+                                console.log("User roles: ", user.roles);
+                                return (
+                                  user.roles.includes(userType) &&
+                                  user.status === 1
+                                );
+                              })
+                              .map((user) => (
+                                <option
+                                  style={{ backgroundColor: "#befac6" }}
+                                  value={user.userId}
+                                >
+                                  {user.userName}
+                                </option>
+                              ))}
+                          </optgroup>
+                          <optgroup
+                            label={`${userType.toUpperCase()}S ON-LEAVE`}
+                            style={{
+                              backgroundColor: "#e0e0e0",
+                              textTransform: "uppercase",
+                              color: "gray",
+                            }}
+                          >
+                            {userList
+                              .filter((user) => {
+                                console.log("User roles: ", user.roles);
+                                return (
+                                  user.roles.includes(userType) &&
+                                  user.status === 2
+                                );
+                              })
+                              .map((user) => (
+                                <option
+                                  style={{ backgroundColor: "#f0f0f0" }}
+                                  value={user.userId}
+                                  disabled
+                                >
+                                  {user.userName}
+                                </option>
+                              ))}
+                          </optgroup>
+                          <optgroup
+                            label={`UN-AVAILABLE ${userType.toUpperCase()}S`}
+                            style={{
+                              backgroundColor: "#fabebe",
+                              textTransform: "uppercase",
+                              color: "#9c0202",
+                            }}
+                          >
+                            {userList
+                              .filter((user) => {
+                                console.log("User roles: ", user.roles);
+                                return (
+                                  user.roles.includes(userType) &&
+                                  user.status === 0
+                                );
+                              })
+                              .map((user) => (
+                                <option
+                                  style={{ backgroundColor: "#f0f0f0" }}
+                                  value={user.userId}
+                                  disabled
+                                >
+                                  {user.userName}
+                                </option>
+                              ))}
+                          </optgroup>
                         </select>
                       </div>
-                    </div>
-
-                    <div className="row">
+                      {audInspType === "MSC" && (
+                        <React.Fragment>
+                          <div className="col-sm-4">
+                            <label style={{ color: "black" }}>Audit Type</label>
+                            <select
+                              className="form-control"
+                              value={enteredAuditType}
+                              onChange={auditTypeChangeHandler}
+                            >
+                              <option value="" disabled selected hidden>
+                                Select Your Option
+                              </option>
+                              <option value="adventurer">ISM</option>
+                              <option value="advantagesummer">ISPS</option>
+                              <option value="advantage">MLC</option>
+                            </select>
+                          </div>
+                          <div className="col-sm-4">
+                            <label style={{ color: "black" }}>
+                              Audit Sub Type
+                            </label>
+                            <select
+                              className="form-control"
+                              value={enteredAuditSubType}
+                              onChange={auditSubTypeChangeHandler}
+                            >
+                              <option value="" disabled selected hidden>
+                                Select Your Option
+                              </option>
+                              <option value="adventurer">INITIAL</option>
+                              <option value="advantagesummer">INTERIM</option>
+                              <option value="advantage">INTERMEDIATE</option>
+                              <option value="advantagesummer">RENEWAL</option>
+                              <option value="advantage">ADDITIONAL</option>
+                            </select>
+                          </div>
+                        </React.Fragment>
+                      )}
+                      {audInspType === "INSPECTION" && (
+                        <div className="col-sm-4">
+                          <label style={{ color: "black" }}>
+                            Inspection Type
+                          </label>
+                          <select
+                            className="form-control"
+                            onChange={({ target: { value } }) =>
+                              setInspectionType(value)
+                            }
+                            value={inspectionType}
+                          >
+                            <option value="" disabled>
+                              Select Inspection Type
+                            </option>
+                            <option value="AIS">AIS Inspection</option>
+                            <option value="VM">VM Inspection</option>
+                            <option value="VETTING">Vetting Inspection</option>
+                          </select>
+                        </div>
+                      )}
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>
                           Certificate Expiry Date
@@ -364,16 +661,19 @@ const BookAnAudit = (props) => {
                           min="2019-01-01"
                           max="2022-12-31"
                           onChange={certificateExpiryDateChangeHandler}
-                          value={eneteredCertificateExpiryDate}
+                          value={enteredCertificateExpiryDate}
                         />
                       </div>
+                    </div>
+
+                    <div className="row">
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>PIC Name</label>
                         <input
                           className="form-control"
                           type="text"
                           onChange={pICNameChangeHandler}
-                          value={eneteredPICName}
+                          value={enteredPICName}
                         />
                       </div>
                       <div className="col-sm-4">
@@ -382,19 +682,16 @@ const BookAnAudit = (props) => {
                           className="form-control"
                           type="text"
                           onChange={pICEmailChangeHandler}
-                          value={eneteredPICEmail}
+                          value={enteredPICEmail}
                         />
                       </div>
-                    </div>
-
-                    <div className="row">
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>PIC Phone</label>
                         <input
                           className="form-control"
                           type="text"
                           onChange={pICPhoneChangeHandler}
-                          value={eneteredPICPhone}
+                          value={enteredPICPhone}
                         />
                       </div>
                     </div>
@@ -411,6 +708,7 @@ const BookAnAudit = (props) => {
           </div>
         </Col>
       </Row>
+      <Notify ref={notifyRef} />
     </div>
   );
 };
