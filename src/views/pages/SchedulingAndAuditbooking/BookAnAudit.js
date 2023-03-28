@@ -80,7 +80,7 @@ const notifyError = (notifyRef, error, duration = 2) => {
     message: error,
     type: "danger",
     autoDismiss: duration,
-    icon: "now-ui-icons ui-1_simple-remove"
+    icon: "now-ui-icons ui-1_simple-remove",
   });
 };
 
@@ -699,7 +699,7 @@ const BookAnAudit = (props) => {
 
                   <div className="d-flex justify-content-center">
                     <button type="submit" className="btn btn-primary">
-                      Book An Audit
+                      Book An Audit/Inspection
                     </button>
                   </div>
                 </form>
