@@ -91,7 +91,7 @@ const BookAnAudit = (props) => {
   const [enteredVesselType, setEnteredVesselType] = useState("");
   const [enteredLocation, setEnteredLocation] = useState("");
   const [enteredETA, setEnteredETA] = useState("");
-  const [enteredEID, setEnteredEID] = useState("");
+  const [enteredETD, setEnteredETD] = useState("");
   const [enteredPortAgentName, setEnteredPortAgentName] = useState("");
   const [enteredPortAgentEmail, setEnteredPortAgentEmail] = useState("");
   const [enteredPortAgentPhone, setEnteredPortAgentPhone] = useState("");
@@ -149,9 +149,9 @@ const BookAnAudit = (props) => {
     setEnteredETA(event.target.value);
   };
 
-  const eidChangeHandler = (event) => {
+  const etdChangeHandler = (event) => {
     console.log(event.target.value);
-    setEnteredEID(event.target.value);
+    setEnteredETD(event.target.value);
   };
 
   const portAgentNameChangeHandler = (event) => {
@@ -203,7 +203,7 @@ const BookAnAudit = (props) => {
       vesselType: enteredVesselType,
       location: enteredLocation,
       eta: new Date(enteredETA),
-      eid: new Date(enteredEID),
+      eid: new Date(enteredETD),
       portAgentName: enteredPortAgentName,
       portAgentEmail: enteredPortAgentEmail,
       portAgentPhone: enteredPortAgentPhone,
@@ -235,7 +235,7 @@ const BookAnAudit = (props) => {
     if (enteredETA === "") {
       return notifyError(notifyRef, "Please set the ETA");
     }
-    if (enteredEID === "") {
+    if (enteredETD === "") {
       return notifyError(notifyRef, "Please set the EID");
     }
     if (enteredPortAgentName === "") {
@@ -278,7 +278,7 @@ const BookAnAudit = (props) => {
     setEnteredVesselType("");
     setEnteredLocation("");
     setEnteredETA("");
-    setEnteredEID("");
+    setEnteredETD("");
     setEnteredPortAgentName("");
     setEnteredPortAgentEmail("");
     setEnteredPortAgentPhone("");
@@ -305,7 +305,7 @@ const BookAnAudit = (props) => {
             <Card className="card-calendar">
               <div className="bookauditheader">
                 <CardHeader className="bookauditheader">
-                  <h4 className="cardTitleWhite">BOOK AN AUDIT/ INSPECTION</h4>
+                  <h4 className="cardTitleWhite">REQUEST AUDIT/ INSPECTION</h4>
                   {/* <p class ="cardCategoryWhite">Complete your profile</p> */}
                 </CardHeader>
               </div>
@@ -431,14 +431,14 @@ const BookAnAudit = (props) => {
 
                     <div className="row">
                       <div className="col-sm-4">
-                        <label style={{ color: "black" }}>EID</label>
+                        <label style={{ color: "black" }}>ETD</label>
                         <input
                           className="form-control"
                           type="date"
                           min="2019-01-01"
                           max="2022-12-31"
-                          onChange={eidChangeHandler}
-                          value={enteredEID}
+                          onChange={etdChangeHandler}
+                          value={enteredETD}
                         />
                       </div>
                       <div className="col-sm-4">
@@ -699,7 +699,7 @@ const BookAnAudit = (props) => {
 
                   <div className="d-flex justify-content-center">
                     <button type="submit" className="btn btn-primary">
-                      Book An Audit/Inspection
+                      Request Audit/Inspection
                     </button>
                   </div>
                 </form>

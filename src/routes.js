@@ -101,8 +101,8 @@ const routes = [
         layout: "/admin"
       },
       {
-        path: "/bookAuditOrInspection",
-        name: "Book Audit/Inspection",
+        path: "/requestAuditOrInspection",
+        name: "Request Audit/Inspection",
         mini: "fa fa-calendar-check-o",
         component: BookAnAudit,
         layout: "/admin"
