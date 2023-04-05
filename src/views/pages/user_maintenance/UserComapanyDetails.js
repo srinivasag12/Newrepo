@@ -4,10 +4,7 @@ import { Tabs } from "antd";
 import { Tag, Divider } from "antd";
 import { Table } from "antd";
 
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// Z
 import { useHistory } from "react-router-dom";
 import { Collapse } from "antd";
 

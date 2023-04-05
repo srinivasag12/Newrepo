@@ -5,65 +5,28 @@ import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 import Notify from "react-notification-alert";
 import { useRef } from "react";
 import "react-notification-alert/dist/animate.css";
+import { useLocation } from "react-router-dom";
+import dayjs from "dayjs";
+import { Input, Radio, Select } from "antd";
 
-const userList = [
-  {
-    userName: "SANDEEP K",
-    userId: 1,
-    status: 1,
-    statusDesc: "Available",
-    roles: ["Auditor", "Inspector"],
-  },
-  {
-    userName: "RUPESH K",
-    userId: 2,
-    status: 1,
-    statusDesc: "Available",
-    roles: ["Auditor", "Inspector"],
-  },
-  {
-    userName: "Deepak",
-    userId: 3,
-    status: 0,
-    statusDesc: "Not Available",
-    roles: ["Auditor"],
-  },
-  {
-    userName: "DWAYNE",
-    userId: 125,
-    status: 2,
-    statusDesc: "On Leave",
-    roles: ["Auditor", "Inspector"],
-  },
-  {
-    userName: "MICHAEL",
-    userId: 120,
-    status: 2,
-    statusDesc: "On Leave",
-    roles: ["Auditor", "Inspector"],
-  },
-  {
-    userName: "KIRAN",
-    userId: 17,
-    status: 1,
-    statusDesc: "Available",
-    roles: ["Inspector"],
-  },
-  {
-    userName: "JOHN",
-    userId: 12,
-    status: 2,
-    statusDesc: "On Leave",
-    roles: ["Inspector"],
-  },
-  {
-    userName: "TRAVIS",
-    userId: 12,
-    status: 0,
-    statusDesc: "Not Available",
-    roles: ["Inspector"],
-  },
-];
+import {
+  auditTypes,
+  auditSubTypes,
+  inspectionList,
+  userList,
+} from "constants/AppConstants";
+import { ownerVesselList, vesselList } from "constants/AppConstants";
+
+const getVesselFieldOptions = (vesselFieldName) => {
+  const vesselInfo = (vessel) => `${vessel[`${vesselFieldName}`]}`;
+  const vessels =
+    localStorage.getItem("role") == "owner1" ? ownerVesselList : vesselList;
+
+  return vessels.map((vessel) => ({
+    label: `${vesselInfo(vessel)}`.trim(),
+    value: vessel.vesselImoNo,
+  }));
+};
 
 const notifySuccess = (notifyRef, message, duration = 2) => {
   notifyRef.current?.notificationAlert({
@@ -84,18 +47,37 @@ const notifyError = (notifyRef, error, duration = 2) => {
   });
 };
 
+const saveAuditInspectionRequest = (newRequest) => {
+  const requests = JSON.parse(localStorage.getItem("requests") || "[]");
+  console.log("Existing requests: ", requests);
+  localStorage.setItem(
+    "requests",
+    JSON.stringify([...requests, { id: requests.length, ...newRequest }])
+  );
+};
+
+const filterVesselOptions = (input, { label }) =>
+  `${label || ""}`.toUpperCase().includes(`${input}`.toUpperCase());
+
 const BookAnAudit = (props) => {
-  const [enteredVesselName, setEnteredVesselName] = useState("");
-  const [enteredVesselImo, setEnteredVesselImo] = useState("");
-  const [enteredOfficeNo, setEnteredOfficeNo] = useState("");
-  const [enteredVesselType, setEnteredVesselType] = useState("");
+  const dateObject = useLocation().state;
+  const vessels =
+    localStorage.getItem("role") == "owner1"
+      ? ownerVesselList.slice()
+      : vesselList.slice();
+
+  const [vessel, setVessel] = useState({ id: "", detail: "" });
+  const [enteredETA, setEnteredETA] = useState(
+    `${dateObject}` === `{}` || !dateObject || !dateObject?.dateInfo
+      ? ""
+      : dayjs(new Date(dateObject?.dateInfo)).format("YYYY-MM-DD")
+  );
   const [enteredLocation, setEnteredLocation] = useState("");
-  const [enteredETA, setEnteredETA] = useState("");
   const [enteredETD, setEnteredETD] = useState("");
   const [enteredPortAgentName, setEnteredPortAgentName] = useState("");
   const [enteredPortAgentEmail, setEnteredPortAgentEmail] = useState("");
   const [enteredPortAgentPhone, setEnteredPortAgentPhone] = useState("");
-  const [enteredAuditType, setEnteredAuditType] = useState("");
+  const [auditType, setAuditType] = useState([]);
   const [enteredAuditSubType, setEnteredAuditSubType] = useState("");
   const [enteredCertificateExpiryDate, setEnteredPortCertificateExpiryDate] =
     useState("");
@@ -104,7 +86,7 @@ const BookAnAudit = (props) => {
   const [enteredPICPhone, setEnteredPICPhone] = useState("");
 
   const [audInspType, setAudInspType] = useState("");
-  const [inspectionType, setInspectionType] = useState("");
+  const [inspectionType, setInspectionType] = useState([]);
   const [audOrInsp, setAudOrInsp] = useState("");
 
   const notifyRef = useRef();
@@ -115,119 +97,58 @@ const BookAnAudit = (props) => {
       ? "Auditor"
       : "Inspector";
 
-  useEffect(() => {
-    console.log("useEffect", props);
-  }, []);
-
-  const vesselNameChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredVesselName(event.target.value);
-  };
-
-  const vesselImoChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredVesselImo(event.target.value);
-  };
-
-  const officeNoChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredOfficeNo(event.target.value);
-  };
-
-  const vesselTypeChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredVesselType(event.target.value);
+  const handleVesselChange = (vesselImoNumber) => {
+    const [vesselDetail] = vessels.filter(
+      ({ vesselImoNo }) => vesselImoNo === vesselImoNumber
+    );
+    setVessel({
+      id: vesselImoNumber,
+      detail: vesselDetail,
+    });
   };
 
   const locationChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredLocation(event.target.value);
   };
 
   const etaChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredETA(event.target.value);
   };
 
   const etdChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredETD(event.target.value);
   };
 
   const portAgentNameChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPortAgentName(event.target.value);
   };
 
   const portAgentEmailChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPortAgentEmail(event.target.value);
   };
 
   const portAgentPhoneChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPortAgentPhone(event.target.value.replace(/\+|-/gi, ""));
   };
-  const auditTypeChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredAuditType(event.target.value);
-  };
-  const auditSubTypeChangeHandler = (event) => {
-    console.log(event.target.value);
-    setEnteredAuditSubType(event.target.value);
-  };
+
   const certificateExpiryDateChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPortCertificateExpiryDate(event.target.value);
   };
   const pICNameChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPICName(event.target.value);
   };
   const pICEmailChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPICEmail(event.target.value);
   };
   const pICPhoneChangeHandler = (event) => {
-    console.log(event.target.value);
     setEnteredPICPhone(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    let error = false;
-    const expenseData = {
-      vesselName: enteredVesselName,
-      vesselImo: enteredVesselImo,
-      officeNo: enteredOfficeNo,
-      vesselType: enteredVesselType,
-      location: enteredLocation,
-      eta: new Date(enteredETA),
-      eid: new Date(enteredETD),
-      portAgentName: enteredPortAgentName,
-      portAgentEmail: enteredPortAgentEmail,
-      portAgentPhone: enteredPortAgentPhone,
-      auditType: enteredAuditType,
-      auditSubType: enteredAuditSubType,
-      certificateExpiryDate: new Date(enteredCertificateExpiryDate),
-      pICName: enteredPICName,
-      pICEmail: enteredPICEmail,
-      pICPhone: enteredPICPhone,
-    };
 
-    console.log("Submitted Data ", expenseData);
-
-    if (enteredVesselName === "") {
-      return notifyError(notifyRef, "Please select a Vessel");
-    }
-    if (enteredVesselImo === "") {
-      return notifyError(notifyRef, "Please enter the Vessel Imo number");
-    }
-    if (enteredOfficeNo === "") {
-      return notifyError(notifyRef, "Please enter the Office number");
-    }
-    if (enteredVesselType === "") {
-      return notifyError(notifyRef, "Please enter the Vessel type");
+    if (vessel.id === "") {
+      return notifyError(notifyRef, "Please select a vessel");
     }
     if (enteredLocation === "") {
       return notifyError(notifyRef, "Please enter the Location");
@@ -268,14 +189,52 @@ const BookAnAudit = (props) => {
     if (audInspType === "MSC" && enteredAuditSubType === "") {
       return notifyError(notifyRef, "Please select Audit Type");
     }
-    if (audInspType === "MSC" && enteredAuditType === "") {
+    if (audInspType === "MSC" && auditType === "") {
       return notifyError(notifyRef, "Please select Audit Sub-Type");
     }
 
-    setEnteredVesselName("");
-    setEnteredVesselImo("");
-    setEnteredOfficeNo("");
-    setEnteredVesselType("");
+    const auditTypeList = [...auditTypes];
+    const auditSubTypeList = [...auditSubTypes];
+    const inspectionTypeList = [...inspectionList];
+
+    const audOrInspDetails =
+      audInspType === "MSC"
+        ? {
+            auditType: auditTypeList.filter((type) =>
+              auditType.some((typeVal) => typeVal === `${type.id}`)
+            ),
+            auditSubType: auditSubTypeList.filter(
+              (type) => `${type.id}` === `${enteredAuditSubType}`
+            )[0],
+          }
+        : {
+            inspectionType: inspectionTypeList.filter((type) =>
+              inspectionType.some((inspType) => `${inspType}` === `${type.id}`)
+            ),
+          };
+    const expenseData = {
+      vesselName: vessel.detail?.vesselName,
+      vesselImo: vessel.detail?.vesselImoNo,
+      officeNo: vessel.detail?.officialNo,
+      vesselType: vessel.detail?.vesselType,
+      location: enteredLocation,
+      eta: new Date(enteredETA),
+      etd: new Date(enteredETD),
+      portAgentName: enteredPortAgentName,
+      portAgentEmail: enteredPortAgentEmail,
+      portAgentPhone: enteredPortAgentPhone,
+      certificateExpiryDate: new Date(enteredCertificateExpiryDate),
+      pICName: enteredPICName,
+      pICEmail: enteredPICEmail,
+      pICPhone: enteredPICPhone,
+      ...audOrInspDetails,
+    };
+
+    console.log("Submitted Data ", expenseData);
+
+    saveAuditInspectionRequest(expenseData);
+
+    setVessel({ id: "", detail: "" });
     setEnteredLocation("");
     setEnteredETA("");
     setEnteredETD("");
@@ -287,18 +246,38 @@ const BookAnAudit = (props) => {
     setEnteredPICName("");
     setEnteredPortCertificateExpiryDate("");
     setEnteredAuditSubType("");
-    setEnteredAuditType("");
+    setAuditType([]);
+    setAudInspType("");
+    setAudOrInsp("");
+    setInspectionType([]);
 
     notifySuccess(
       notifyRef,
       `${audInspType === "MSC" ? "AUDIT" : "INSPECTION"} created successfully!`
     );
   };
+
+  React.useEffect(
+    () => () => {
+      console.log("Cleaning up..");
+      const { dateInfo, ...others } = window.history.state?.state || {};
+      if (`${enteredETA}`.length > 0 && !!dateInfo) {
+        console.log("Resetting date..");
+        window.history.state.state = { ...others };
+      }
+    },
+    []
+  );
+
   return (
     <div className="content">
       {/* {this.state.alert} */}
 
       {/* {props.location.state === "dtls" ? "true" : "false"} */}
+      <Radio.Group>
+        <Radio value={"MSC"}>MSC</Radio>
+        <Radio value={"INSPECTION"}>INSPECTION</Radio>
+      </Radio.Group>
       <Row>
         <Col className="ml-auto mr-auto" md="12">
           <div className="bookauditcard">
@@ -313,82 +292,55 @@ const BookAnAudit = (props) => {
                 <form className="bookaudittable" onSubmit={submitHandler}>
                   <div className="new-expense__controls">
                     <div className="row">
+                      <div className="col-sm-4"></div>
+                    </div>
+                    <div className="row">
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>Vessel Name</label>
-                        {localStorage.getItem("role") == "owner1" ? (
-                          <select
-                            className="form-control"
-                            onChange={vesselNameChangeHandler}
-                            value={
-                              props.location.state === "dtls"
-                                ? "DEEPWATER PROTEUS"
-                                : enteredVesselName
-                            }
-                          >
-                            <option value="" disabled selected hidden>
-                              Select Your Vessel
-                            </option>
-                            <option value="adventurer">
-                              DEEPWATER PROTEUS
-                            </option>
-                            <option value="DEEPWATER PROTEUS">
-                              DEEPWATER POSEIDON
-                            </option>
-                            <option value="advantagesummer">
-                              DHIRUBHAI DEEPWATER KG2
-                            </option>
-                            <option value="advantage">DEEPWATER PONTUS</option>
-                          </select>
-                        ) : (
-                          <select
-                            className="form-control"
-                            onChange={vesselNameChangeHandler}
-                            value={
-                              props.location.state === "dtls"
-                                ? "GH CITATION"
-                                : enteredVesselName
-                            }
-                          >
-                            <option value="" disabled selected hidden>
-                              Select Your Vessel
-                            </option>
-                            <option value="adventurer">FEDERAL TAMBO</option>
-                            <option value="GH CITATION">BALTIC LEOPARD</option>
-                            <option value="advantagesummer">
-                              NAVIGARE BACCA
-                            </option>
-                            <option value="advantage">SEAMAX FAIRFIELD</option>
-                          </select>
-                        )}
-                      </div>
-                      <div className="col-sm-4">
-                        <label style={{ color: "black" }}>Vessel Imo</label>
-                        <input
+                        <Select
                           className="form-control"
-                          type="number"
-                          min="0.01"
-                          step="0.01"
-                          onChange={vesselImoChangeHandler}
-                          value={
-                            props.location.state === "dtls"
-                              ? "9722041"
-                              : enteredVesselImo
-                          }
+                          allowClear
+                          style={{ width: "100%" }}
+                          placeholder={"Type Vessel name"}
+                          onChange={handleVesselChange}
+                          value={vessel.id}
+                          optionFilterProp="children"
+                          showSearch
+                          filterOption={filterVesselOptions}
+                          options={getVesselFieldOptions("vesselName")}
+                          notFoundContent={"No vessels found"}
                         />
                       </div>
                       <div className="col-sm-4">
-                        <label style={{ color: "black" }}>Office No.</label>
-                        <input
+                        <label style={{ color: "black" }}>Vessel Imo</label>
+                        <Select
                           className="form-control"
-                          type="number"
-                          min="0.01"
-                          step="0.01"
-                          onChange={officeNoChangeHandler}
-                          value={
-                            props.location.state === "dtls"
-                              ? "7195"
-                              : enteredOfficeNo
-                          }
+                          allowClear
+                          style={{ width: "100%" }}
+                          placeholder={"Type Vessel IMO No."}
+                          onChange={handleVesselChange}
+                          value={vessel.id}
+                          optionFilterProp="children"
+                          showSearch
+                          filterOption={filterVesselOptions}
+                          options={getVesselFieldOptions("vesselImoNo")}
+                          notFoundContent={"No vessels found"}
+                        />
+                      </div>
+                      <div className="col-sm-4">
+                        <label style={{ color: "black" }}>Official No.</label>
+                        <Select
+                          className="form-control"
+                          allowClear
+                          style={{ width: "100%" }}
+                          placeholder={"Type Vessel Official No."}
+                          onChange={handleVesselChange}
+                          value={vessel.id}
+                          optionFilterProp="children"
+                          showSearch
+                          filterOption={filterVesselOptions}
+                          options={getVesselFieldOptions("officialNo")}
+                          notFoundContent={"No vessels found"}
                         />
                       </div>
                     </div>
@@ -396,15 +348,10 @@ const BookAnAudit = (props) => {
                     <div className="row">
                       <div className="col-sm-4">
                         <label style={{ color: "black" }}>Vessel Type</label>
-                        <input
+                        <Input
                           className="form-control"
-                          type="text"
-                          onChange={vesselTypeChangeHandler}
-                          value={
-                            props.location.state === "dtls"
-                              ? "Bulk carrier"
-                              : enteredVesselType
-                          }
+                          value={vessel.detail?.vesselType || ""}
+                          readOnly
                         />
                       </div>
                       <div className="col-sm-4">
@@ -421,8 +368,6 @@ const BookAnAudit = (props) => {
                         <input
                           className="form-control"
                           type="date"
-                          min="2019-01-01"
-                          max="2022-12-31"
                           onChange={etaChangeHandler}
                           value={enteredETA}
                         />
@@ -435,8 +380,6 @@ const BookAnAudit = (props) => {
                         <input
                           className="form-control"
                           type="date"
-                          min="2019-01-01"
-                          max="2022-12-31"
                           onChange={etdChangeHandler}
                           value={enteredETD}
                         />
@@ -488,6 +431,9 @@ const BookAnAudit = (props) => {
                           onChange={({ target: { value } }) => {
                             setAudInspType(value);
                             setAudOrInsp("");
+                            setEnteredPICName("");
+                            setEnteredPICEmail("");
+                            setEnteredPICPhone("");
                           }}
                         >
                           <option value="" disabled>
@@ -504,9 +450,17 @@ const BookAnAudit = (props) => {
                         <select
                           className="form-control"
                           value={audOrInsp}
-                          onChange={({ target: { value } }) =>
-                            setAudOrInsp(value)
-                          }
+                          onChange={({ target: { value } }) => {
+                            const [user] = userList.filter(
+                              ({ userId }) => `${userId}` === `${value}`
+                            );
+                            setAudOrInsp(value);
+                            setEnteredPICName(
+                              `${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}`
+                            );
+                            setEnteredPICEmail(`${user.email}`);
+                            setEnteredPICPhone(`${user.phone}`);
+                          }}
                           disabled={audInspType === ""}
                         >
                           <option
@@ -522,13 +476,11 @@ const BookAnAudit = (props) => {
                             }}
                           >
                             {userList
-                              .filter((user) => {
-                                console.log("User roles: ", user.roles);
-                                return (
+                              .filter(
+                                (user) =>
                                   user.roles.includes(userType) &&
                                   user.status === 1
-                                );
-                              })
+                              )
                               .map((user) => (
                                 <option
                                   style={{ backgroundColor: "#befac6" }}
@@ -547,13 +499,11 @@ const BookAnAudit = (props) => {
                             }}
                           >
                             {userList
-                              .filter((user) => {
-                                console.log("User roles: ", user.roles);
-                                return (
+                              .filter(
+                                (user) =>
                                   user.roles.includes(userType) &&
                                   user.status === 2
-                                );
-                              })
+                              )
                               .map((user) => (
                                 <option
                                   style={{ backgroundColor: "#f0f0f0" }}
@@ -574,7 +524,6 @@ const BookAnAudit = (props) => {
                           >
                             {userList
                               .filter((user) => {
-                                console.log("User roles: ", user.roles);
                                 return (
                                   user.roles.includes(userType) &&
                                   user.status === 0
@@ -596,37 +545,37 @@ const BookAnAudit = (props) => {
                         <React.Fragment>
                           <div className="col-sm-4">
                             <label style={{ color: "black" }}>Audit Type</label>
-                            <select
+                            <Select
+                              mode="multiple"
                               className="form-control"
-                              value={enteredAuditType}
-                              onChange={auditTypeChangeHandler}
-                            >
-                              <option value="" disabled selected hidden>
-                                Select Your Option
-                              </option>
-                              <option value="adventurer">ISM</option>
-                              <option value="advantagesummer">ISPS</option>
-                              <option value="advantage">MLC</option>
-                            </select>
+                              allowClear
+                              style={{ width: "100%" }}
+                              placeholder="Select Audit Type"
+                              onChange={(option) => {
+                                setAuditType(option);
+                                setEnteredAuditSubType("");
+                              }}
+                              value={auditType}
+                              options={auditTypes.map((type) => ({
+                                label: type.desc,
+                                value: type.id,
+                              }))}
+                            />
                           </div>
                           <div className="col-sm-4">
                             <label style={{ color: "black" }}>
                               Audit Sub Type
                             </label>
-                            <select
+                            <Select
                               className="form-control"
                               value={enteredAuditSubType}
-                              onChange={auditSubTypeChangeHandler}
-                            >
-                              <option value="" disabled selected hidden>
-                                Select Your Option
-                              </option>
-                              <option value="adventurer">INITIAL</option>
-                              <option value="advantagesummer">INTERIM</option>
-                              <option value="advantage">INTERMEDIATE</option>
-                              <option value="advantagesummer">RENEWAL</option>
-                              <option value="advantage">ADDITIONAL</option>
-                            </select>
+                              onChange={setEnteredAuditSubType}
+                              options={auditSubTypes.map((type) => ({
+                                label: type.desc,
+                                value: type.id,
+                                key: `audSubType-${type.id}`,
+                              }))}
+                            />
                           </div>
                         </React.Fragment>
                       )}
@@ -635,20 +584,17 @@ const BookAnAudit = (props) => {
                           <label style={{ color: "black" }}>
                             Inspection Type
                           </label>
-                          <select
+                          <Select
                             className="form-control"
-                            onChange={({ target: { value } }) =>
-                              setInspectionType(value)
-                            }
+                            mode="multiple"
                             value={inspectionType}
-                          >
-                            <option value="" disabled>
-                              Select Inspection Type
-                            </option>
-                            <option value="AIS">AIS Inspection</option>
-                            <option value="VM">VM Inspection</option>
-                            <option value="VETTING">Vetting Inspection</option>
-                          </select>
+                            onChange={setInspectionType}
+                            options={inspectionList.map((type) => ({
+                              label: type.desc,
+                              value: type.id,
+                              key: `inspType-${type.id}`,
+                            }))}
+                          />
                         </div>
                       )}
                       <div className="col-sm-4">
@@ -658,8 +604,6 @@ const BookAnAudit = (props) => {
                         <input
                           className="form-control"
                           type="date"
-                          min="2019-01-01"
-                          max="2022-12-31"
                           onChange={certificateExpiryDateChangeHandler}
                           value={enteredCertificateExpiryDate}
                         />
@@ -674,6 +618,7 @@ const BookAnAudit = (props) => {
                           type="text"
                           onChange={pICNameChangeHandler}
                           value={enteredPICName}
+                          readOnly
                         />
                       </div>
                       <div className="col-sm-4">
@@ -683,6 +628,7 @@ const BookAnAudit = (props) => {
                           type="text"
                           onChange={pICEmailChangeHandler}
                           value={enteredPICEmail}
+                          readOnly
                         />
                       </div>
                       <div className="col-sm-4">
@@ -692,6 +638,7 @@ const BookAnAudit = (props) => {
                           type="text"
                           onChange={pICPhoneChangeHandler}
                           value={enteredPICPhone}
+                          readOnly
                         />
                       </div>
                     </div>

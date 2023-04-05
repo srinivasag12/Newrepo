@@ -20,14 +20,14 @@ import "./Dashboard.css"
 import { Card, CardHeader, CardBody, CardTitle, Row, Col, CardSubtitle, CardFooter, Input } from "reactstrap";
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import { useHistory } from "react-router-dom";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import InputBase from '@material-ui/core/InputBase';
-import Search from '@material-ui/icons/Search';
+import InputBase from '@mui/material/InputBase';
+import Search from '@mui/icons-material/Search';
 import ToggleButton from '@mui/material/ToggleButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';

@@ -1,7 +1,7 @@
 import React from "react";
 import "./VesselSearch.css";
 import { Input } from "antd";
-import Search from "@material-ui/icons/Search";
+import Search from "@mui/icons-material/Search";
 
 function VesselSearch(props) {
   const searchChangeHandler = (event) => {

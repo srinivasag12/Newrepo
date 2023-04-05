@@ -41,13 +41,15 @@ import VectorMap from "views/maps/VectorMap.js";
 import Widgets from "views/Widgets.js";
 import Wizard from "views/forms/Wizard.js";
 
-import Vessel from "views/pages/Vessel/Vessel"
-import VesselDetails from "views/pages/VesselDetails/VesselDetails"
-import VesselStatement from "views/pages/VesselStatement/VesselStatement"
-import BookAnAudit from "views/pages/SchedulingAndAuditbooking/BookAnAudit"
-import Calendar from "views/pages/SchedulingAndAuditbooking/Calendar"
-import MyProfile from "views/pages/MyProfile/MyProfile"
-import UserMaintenance from "views/pages/user_maintenance/UserMaintenance"
+import Vessel from "views/pages/Vessel/Vessel";
+import VesselDetails from "views/pages/VesselDetails/VesselDetails";
+import VesselStatement from "views/pages/VesselStatement/VesselStatement";
+import BookAnAudit from "views/pages/SchedulingAndAuditbooking/BookAnAudit";
+import Calendar from "views/pages/SchedulingAndAuditbooking/Calendar";
+import MyProfile from "views/pages/MyProfile/MyProfile";
+import UserMaintenance from "views/pages/user_maintenance/UserMaintenance";
+import EventCalendar from "views/pages/SchedulingAndAuditbooking/EventCalendar";
+import RequestAuditInspection from "views/pages/SchedulingAndAuditbooking/RequestAuditInspection";
 
 const routes = [
   {
@@ -55,7 +57,7 @@ const routes = [
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     collapse: true,
@@ -68,24 +70,23 @@ const routes = [
         name: "Vessel",
         mini: "fa fa-ship",
         component: Vessel,
-        layout: "/admin"
+        layout: "/admin",
       },
       {
         path: "/VesselDetails",
         name: "VesselDetails",
         mini: "fa fa-info-circle",
         component: VesselDetails,
-        layout: "/admin"
+        layout: "/admin",
       },
-    
-    ]
+    ],
   },
   {
     path: "/VesselStatement",
     name: "VesselStatement",
     icon: "fa fa-file-text-o",
     component: VesselStatement,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     collapse: true,
@@ -97,24 +98,26 @@ const routes = [
         path: "/calendar",
         name: "Schedule Calendar",
         mini: "fa fa-calendar",
-        component: Calendar,
-        layout: "/admin"
+        // component: Calendar,
+        component: EventCalendar,
+        layout: "/admin",
       },
       {
         path: "/requestAuditOrInspection",
         name: "Request Audit/Inspection",
         mini: "fa fa-calendar-check-o",
-        component: BookAnAudit,
-        layout: "/admin"
+        // component: BookAnAudit,
+        component: RequestAuditInspection,
+        layout: "/admin",
       },
-    ]
+    ],
   },
   {
     path: "/userMaintenance",
     name: "User Maintenance",
     icon: "nc-icon nc-circle-10",
     component: UserMaintenance,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/profile",
@@ -131,149 +134,148 @@ const routes = [
   //   layout: "/admin"
   // }
 ];
-  // {
-      //   path: "/register",
-      //   name: "Register",
-      //   mini: "R",
-      //   component: Register,
-      //   layout: "/auth"
-      // },
-      // {
-      //   path: "/lock-screen",
-      //   name: "LockScreen",
-      //   mini: "LS",
-      //   component: LockScreen,
-      //   layout: "/auth"
-      // },
-      // {
-      //   path: "/user-profile",
-      //   name: "UserProfile",
-      //   mini: "UP",
-      //   component: UserProfile,
-      //   layout: "/admin"
-      // }
-  // {
-  //   collapse: true,
-  //   name: "Components",
-  //   icon: "nc-icon nc-layout-11",
-  //   state: "componentsCollapse",
-  //   views: [
-  //     {
-  //       path: "/buttons",
-  //       name: "Buttons",
-  //       mini: "B",
-  //       component: Buttons,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/grid-system",
-  //       name: "Grid System",
-  //       mini: "GS",
-  //       component: GridSystem,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/panels",
-  //       name: "Panels",
-  //       mini: "P",
-  //       component: Panels,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/sweet-alert",
-  //       name: "Sweet Alert",
-  //       mini: "SA",
-  //       component: SweetAlert,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/notifications",
-  //       name: "Notifications",
-  //       mini: "N",
-  //       component: Notifications,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/icons",
-  //       name: "Icons",
-  //       mini: "I",
-  //       component: Icons,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/typography",
-  //       name: "Typography",
-  //       mini: "T",
-  //       component: Typography,
-  //       layout: "/admin"
-  //     }
-  //   ]
-  // },
-  // {
-  //   collapse: true,
-  //   name: "Forms",
-  //   icon: "nc-icon nc-ruler-pencil",
-  //   state: "formsCollapse",
-  //   views: [
-  //     {
-  //       path: "/regular-forms",
-  //       name: "Regular Forms",
-  //       mini: "RF",
-  //       component: RegularForms,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/extended-forms",
-  //       name: "Extended Forms",
-  //       mini: "EF",
-  //       component: ExtendedForms,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/validation-forms",
-  //       name: "Validation Forms",
-  //       mini: "VF",
-  //       component: ValidationForms,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/wizard",
-  //       name: "Wizard",
-  //       mini: "W",
-  //       component: Wizard,
-  //       layout: "/admin"
-  //     }
-  //   ]
-  // },
-  // {
-  //   collapse: true,
-  //   name: "Tables",
-  //   icon: "nc-icon nc-single-copy-04",
-  //   state: "tablesCollapse",
-  //   views: [
-  //     {
-  //       path: "/regular-tables",
-  //       name: "Regular Tables",
-  //       mini: "RT",
-  //       component: RegularTables,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/extended-tables",
-  //       name: "Extended Tables",
-  //       mini: "ET",
-  //       component: ExtendedTables,
-  //       layout: "/admin"
-  //     },
-  //     {
-  //       path: "/react-tables",
-  //       name: "React Tables",
-  //       mini: "RT",
-  //       component: ReactTables,
-  //       layout: "/admin"
-  //     }
-  //   ]
-  // },
-  
+// {
+//   path: "/register",
+//   name: "Register",
+//   mini: "R",
+//   component: Register,
+//   layout: "/auth"
+// },
+// {
+//   path: "/lock-screen",
+//   name: "LockScreen",
+//   mini: "LS",
+//   component: LockScreen,
+//   layout: "/auth"
+// },
+// {
+//   path: "/user-profile",
+//   name: "UserProfile",
+//   mini: "UP",
+//   component: UserProfile,
+//   layout: "/admin"
+// }
+// {
+//   collapse: true,
+//   name: "Components",
+//   icon: "nc-icon nc-layout-11",
+//   state: "componentsCollapse",
+//   views: [
+//     {
+//       path: "/buttons",
+//       name: "Buttons",
+//       mini: "B",
+//       component: Buttons,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/grid-system",
+//       name: "Grid System",
+//       mini: "GS",
+//       component: GridSystem,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/panels",
+//       name: "Panels",
+//       mini: "P",
+//       component: Panels,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/sweet-alert",
+//       name: "Sweet Alert",
+//       mini: "SA",
+//       component: SweetAlert,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/notifications",
+//       name: "Notifications",
+//       mini: "N",
+//       component: Notifications,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/icons",
+//       name: "Icons",
+//       mini: "I",
+//       component: Icons,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/typography",
+//       name: "Typography",
+//       mini: "T",
+//       component: Typography,
+//       layout: "/admin"
+//     }
+//   ]
+// },
+// {
+//   collapse: true,
+//   name: "Forms",
+//   icon: "nc-icon nc-ruler-pencil",
+//   state: "formsCollapse",
+//   views: [
+//     {
+//       path: "/regular-forms",
+//       name: "Regular Forms",
+//       mini: "RF",
+//       component: RegularForms,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/extended-forms",
+//       name: "Extended Forms",
+//       mini: "EF",
+//       component: ExtendedForms,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/validation-forms",
+//       name: "Validation Forms",
+//       mini: "VF",
+//       component: ValidationForms,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/wizard",
+//       name: "Wizard",
+//       mini: "W",
+//       component: Wizard,
+//       layout: "/admin"
+//     }
+//   ]
+// },
+// {
+//   collapse: true,
+//   name: "Tables",
+//   icon: "nc-icon nc-single-copy-04",
+//   state: "tablesCollapse",
+//   views: [
+//     {
+//       path: "/regular-tables",
+//       name: "Regular Tables",
+//       mini: "RT",
+//       component: RegularTables,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/extended-tables",
+//       name: "Extended Tables",
+//       mini: "ET",
+//       component: ExtendedTables,
+//       layout: "/admin"
+//     },
+//     {
+//       path: "/react-tables",
+//       name: "React Tables",
+//       mini: "RT",
+//       component: ReactTables,
+//       layout: "/admin"
+//     }
+//   ]
+// },
 
 export default routes;
