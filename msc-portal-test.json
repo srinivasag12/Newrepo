@@ -1,20 +1,20 @@
 {
-    "family": "msctaskdef",
+    "family": "msc-portal-test",
     "containerDefinitions": [
         {
-            "name": "msc-c12",
+            "name": "msc-test",
             "image": "014025535279.dkr.ecr.us-east-1.amazonaws.com/mscportal",
-            "cpu": 0,
+            "cpu": 2097152,
             "memoryReservation": 128,
             "portMappings": [
                 {
                     "containerPort": 80,
-                    "hostPort": 0,
+                    "hostPort": 80,
                     "protocol": "tcp"
                 },
                 {
                     "containerPort": 4888,
-                    "hostPort": 0,
+                    "hostPort": 4888,
                     "protocol": "tcp"
                 }
             ],
@@ -28,9 +28,12 @@
     ],
     "taskRoleArn": "arn:aws:iam::014025535279:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::014025535279:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
     "requiresCompatibilities": [
         "EC2"
     ],
-    "cpu": "1024",
-    "memory": "2048"
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "WINDOWS_SERVER_2019_CORE"
+    }
 }
