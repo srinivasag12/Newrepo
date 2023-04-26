@@ -1,32 +1,35 @@
 {
-    "family": "msc-portal-test",
+    "family": "msc-taskdef-1",
     "containerDefinitions": [
         {
-            "name": "msc-test",
+            "name": "msc-01",
             "image": "014025535279.dkr.ecr.us-east-1.amazonaws.com/mscportal",
-            "cpu": 2097152,
-            "memoryReservation": 128,
+            "cpu": 260,
+            "memory": 500,
             "portMappings": [
                 {
+                    "name": "msc-01-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
-                    "protocol": "tcp"
+                    "protocol": "tcp",
+                    "appProtocol": "http"
                 },
                 {
+                    "name": "msc-01-4888-tcp",
                     "containerPort": 4888,
                     "hostPort": 4888,
-                    "protocol": "tcp"
+                    "protocol": "tcp",
+                    "appProtocol": "http"
                 }
             ],
             "essential": true,
-            "entryPoint": [],
-            "command": [],
             "environment": [],
+            "environmentFiles": [],
             "mountPoints": [],
-            "volumesFrom": []
+            "volumesFrom": [],
+            "ulimits": []
         }
     ],
-    "taskRoleArn": "arn:aws:iam::014025535279:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::014025535279:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "requiresCompatibilities": [
